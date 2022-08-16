@@ -9,6 +9,19 @@
   --light-color: #f4f4f4;
 }
 
+body::-webkit-scrollbar {
+  width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(180deg, #00bceb 0%, #00bceb 99%);
+  outline: 1px solid rgb(22, 183, 211);
+}
+
 body {
   font-family: 'PT Sans', sans-serif;
   background-color: #252529;
