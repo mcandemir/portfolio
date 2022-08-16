@@ -1,6 +1,6 @@
 section#resume {
   background:linear-gradient(rgba(0, 0, 0, .88), rgba(0, 0, 0, .88)),
-url('../img/bg/pexels-bich-tran-669996.jpg') no-repeat center/cover;
+url('/img/bg/pexels-bich-tran-669996.jpg') no-repeat center/cover;
   padding: 10rem 0;
 }
 

@@ -47,7 +47,7 @@ a {
   padding: 0;
   width: 100%;
   background:linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)),
-url('/src/img/bg/showcase.jpg') no-repeat center/cover;
+url('/img/bg/showcase.jpg') no-repeat center/cover;
   height: 100vh;
   position: relative;
   overflow-y: hidden;
