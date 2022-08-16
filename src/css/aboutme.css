@@ -1,0 +1,122 @@
+#aboutme{
+  background-color: #fff no-repeat center/cover;
+  width: 100%;
+  overflow: hidden;
+}
+
+.container-aboutme{
+  padding: 0 1rem;
+}
+
+.container-aboutme ul{
+  display: flex;
+  margin: 5%;
+}
+
+.aboutme-introduction {
+  margin-left: 10%;
+}
+
+.image-working{
+  width: 700px;
+}
+
+.aboutme-lead {
+  font-size: 1.3rem;
+  text-align: justify;
+}
+
+@media screen and (max-width: 680px) {
+
+  h3.aboutme-introduction-title{
+    font-size: 1.5rem;
+  }
+
+  p.aboutme-lead {
+    font-size: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 300px) {
+
+  h3.aboutme-introduction-title{
+    font-size: 1.2rem;
+  }
+
+  p.aboutme-lead {
+    font-size: 0.8rem;
+  }
+}
+
+
+@media (max-width: 1450px) and (min-width: 501px) {
+  
+  
+  h3.aboutme-introduction-title{
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  p.aboutme-lead {
+    font-size: 1.2rem;
+  }
+
+  .aboutme-introduction{
+    margin: 5%;
+  }
+
+  .container-aboutme ul{
+    display: inline;
+    margin: 5%;
+  }
+
+  .container-aboutme li{
+    display: inline;
+  }
+
+  .image-working{
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .container-aboutme ul{
+    display: inline;
+    text-align: center;
+    margin: 5%;
+  }
+  .image-working{
+    width: 50%;
+    margin: auto;
+    }
+    .aboutme-introduction{
+      margin: 5%;
+    }
+}
+
+.press {
+  display: block;  /* Remove bullet points; allow greater control of positioning */
+  padding: 0;      /* Override defaults for lists */
+  margin: 0;       /* Override defaults for lists */
+  width: 100%;     /* Get the row full width */
+}
+
+.press li {
+  display: inline-block; /* Get all images to show in a row */
+  width: 5%;            /* logos per row */
+  text-align: center;    /* Centre align the images */
+  padding: 3px;
+}
+
+@media (max-width: 960px) and (min-width: 501px) {
+  .press li { width: 5%; } 
+}
+
+@media (max-width: 500px) {
+  .press li { width: 5%; } 
+}
+
+
+
