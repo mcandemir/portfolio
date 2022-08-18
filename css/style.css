@@ -145,7 +145,7 @@ url('/img/bg/showcase.jpg') no-repeat center/cover;
 
 /* Footer */
 footer .footer-bottom {
-  background: #333;
+  background: #222;
   padding: 1rem;
 }
 
@@ -238,7 +238,7 @@ nav li {
 }
 nav a {
   display: inline-block;
-  width: 100px;
+  width: 100%;
   text-align: center;
   text-decoration: none;
   padding: 10px 0;

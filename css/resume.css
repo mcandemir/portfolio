@@ -24,7 +24,7 @@ url('/img/bg/pexels-bich-tran-669996.jpg') no-repeat center/cover;
 }
 
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 800px) {
   .resume-pdf h3{
     display: inline-flex;
   }
