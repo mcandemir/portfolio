@@ -20,9 +20,9 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 50px 0px;
+  margin: 0px 0px;
   
-  background-color: #252529 no-repeat center/cover;
+  background: #f4f4f4 no-repeat center/cover;
 }
 
 .project-heading {
@@ -36,6 +36,13 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   color: #1a1a1a;
+}
+
+.project-heading a {
+  font-size: 4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #3a3a3a;
 }
 
 @media screen and (max-height: 300px) {
@@ -63,7 +70,7 @@ body {
   border-radius: 8px;
   margin: 10px;
   padding: 5px 20px;
-  color: #ffffff;
+  color: #1a1a1a;
   font-size: 1.8rem;
   letter-spacing: 0.5px;
   font-weight: 400;
@@ -72,12 +79,15 @@ body {
 }
 
 .project-filter li:hover {
-  background-color: #4fe5ff86;
+  background-color: #2b2b2b;
   transition: all 0.35 s;
+  color: #ffffff;
+
 }
 
 .project-filter-active {
-  background-color: #00d9ff77;
+  background-color: #9e9e9e;
+  color: #ffffff;
 }
 
 .project-container {
@@ -95,8 +105,8 @@ body {
   padding: 15px;
   border-radius: 8px;
   margin: 1%;
-  background-color: rgba(255, 255, 255, 0.25);
-  box-shadow: #ffffff54 0px 0px 5px 3.5px;
+  background-color: #f4f4f4;
+  /* box-shadow: #ffffff54 0px 0px 5px 3.5px; */
 }
 
 .project-box img {
@@ -108,19 +118,23 @@ body {
 }
 
 .project-description a{
-  color: rgb(255, 255, 255);
+  color: rgb(51, 51, 51);
+}
+
+.project-description p{
+  color: rgb(51, 51, 51);
 }
 
 .project-footer p{
   font-family: 'Robo Mono', monospace; 
   font-size: 0.9rem; 
-  color: rgb(231, 231, 231);
+  color: rgb(51, 51, 51);
   float: left;
   position: relative;
 }
 
 .project-footer i{
-  color: rgb(233, 233, 233);
+  color: rgb(51, 51, 51);
   float: right;
   margin: auto;
   position: relative;
@@ -128,7 +142,7 @@ body {
 
 @media (hover: hover) {
   .project-box:hover {
-    background-color: rgba(255, 255, 255, 0.384);
+    background-color: rgba(190, 190, 190, 0.384);
     transition: all 0.4s;
   }
   .project-box:hover {
@@ -148,15 +162,15 @@ body {
   }
 
   .project-filter-active {
-    background-color: #00d9ff77;
-    border: 1px solid rgba(219, 219, 219, 0.9);
+    background-color: #ff00ea77;
+    border: 1px solid color #ffffff;
   }
 
   .project-filter li {
     border-radius: 8px;
     margin: 10px;
     padding: 5px 20px;
-    color: #ffffff;
+    color: #868686;
     font-size: 1.2rem;
     letter-spacing: 0.5px;
     font-weight: 400;
