@@ -131,6 +131,7 @@ body {
   color: rgb(51, 51, 51);
   float: left;
   position: relative;
+
 }
 
 .project-footer i{
@@ -138,6 +139,12 @@ body {
   float: right;
   margin: auto;
   position: relative;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.project-footer ul{
+  display: -webkit-flex;
 }
 
 @media (hover: hover) {
