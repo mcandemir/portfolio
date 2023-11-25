@@ -143,9 +143,9 @@ body {
   margin-left: 10px;
 }
 
-.project-footer ul{
+/* .project-footer ul{
   display: -webkit-flex;
-}
+} */
 
 @media (hover: hover) {
   .project-box:hover {
