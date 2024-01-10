@@ -247,95 +247,227 @@
 
 
 
-<section id="experience">
+<!-- My Work Section -->
+<section id="mywork" class="section">
+  <div class="project-heading">
+    <h3><a href="#mywork" class="custom-underline">My Work</a></h3>
+    <hr>
+  </div>
 
-  <h1 class="timeline-header">Experience</h1>
-  <ul class="timeline">
-
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Jul 2023 - Dec 2023</p>
-        <h3>Data Scientist</h3>
-        <h4><i>Dogus Technology • Intern</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-    
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Mar 2023 - Apr 2023</p>
-        <h3>Machine Learning Engineer</h3>
-        <h4><i>TDG - Technology Development Group • Intern</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-    
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Jun 2022 - Aug 2022</p>
-        <h3>Data Scientist</h3>
-        <h4><i>Jotform  • Intern</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-    
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Sep 2021 - Jun 2022</p>
-        <h3>Data Scientist</h3>
-        <h4><i>Nutzentech • Part Time</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Dec 2020 - Mar 2021</p>
-        <h3>Machine Learning Engineer</h3>
-        <h4><i>Apziva • Intern</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-        
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Sep 2020 - Apr 2021</p>
-        <h3>Machine Learning Engineer</h3>
-        <h4><i>Cukurova Hydromobile Team  • Volunteer</i></h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
-        
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">May 2020 - Sep 2020</p>
-        <h3>Machine Learning Engineer</h3>
-        <h4><i>CENGA R&D Team • Volunteer</i></h4>
-        <p></p>
-      </div>
-    </li>    
-  </ul> 
-
-  <h1 class="timeline-header">Education</h1>
-  <ul class="timeline">
-    <li class="timeline-event">
-      <label class="timeline-event-icon"></label>
-      <div class="timeline-event-copy">
-        <p class="timeline-event-thumbnail">Sep 2018 - Jun 2022</p>
-        <h3>Bachelor of Engineering</h3>
-        <h4><i>Cukurova University</i> </h4>
-        <p><strong></strong></p>
-      </div>
-    </li>
+  <!-- filter -->
+  <ul class="project-filter">
+    <li class="list project-filter-active" data-filter="all">All</li>
+    <li class="list" data-filter="datascience">Data Science</li>
+    <li class="list" data-filter="ai">AI</li>
+    <li class="list" data-filter="app">Application</li>
   </ul>
 
+  <br>
+
+  <!-- container -->
+  <div class="project-container">
+
+    <!-- forecast-bus-demand -->
+    <div class="project-box datascience">
+      <a href="/img/projects/imdb-sentiment-analysis.png" data-lightbox="datascience">
+        <img src="/img/projects/imdb-sentiment-analysis.png" alt="imdb-sentiment-analysis">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/imdb-sentiment-analysis" target="_blank">IMDB Sentiment Analysis</a></h3>
+        <p>Performing sentimental analysis on 50K IMDB movies review data.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                Data Science / SentimentAnalysis (2023)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/imdb-sentiment-analysis" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+            <li>
+              <a href="https://www.kaggle.com/code/mehmetcandemir/imdb-sentiment-analysis-eda-tf-idf-90" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- forecast-bus-demand -->
+    <div class="project-box datascience">
+      <a href="/img/projects/bus_forecast.png" data-lightbox="datascience">
+        <img src="/img/projects/bus_forecast.png" alt="bus_forecast">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/forecast-bus-demand" target="_blank">Forecast Bus Demand</a></h3>
+        <p>Forecasting the demand of buses for 10 municipalities.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                Data Science / Python TimeSeries (2022)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/forecast-bus-demand" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ames-house-prices -->
+    <div class="project-box datascience">
+      <a href="/img/projects/ames_house_prices.png" data-lightbox="datascience">
+        <img src="/img/projects/ames_house_prices.png" alt="ames-house-prices">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/ames-house-prices" target="_blank">Ames House Prices</a></h3>
+        <p>Predicting house prices via Ames Housing dataset using advanced regression techniques.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                Data Science / Python Regression (2022)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/ames-house-prices" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+            <li>
+              <a href="https://www.kaggle.com/code/mehmetcandemir/a-study-on-ames-housing-dataset-int-advanced" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- us-wildfire-analysis -->
+    <div class="project-box datascience">
+      <a href="/img/projects/us_wildfire_analysis.png" data-lightbox="datascience">
+        <img src="/img/projects/us_wildfire_analysis.png" alt="us-wildfire-analysis">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/us-wildfire-analysis" target="_blank">U.S. Wildfire Analysis</a></h3>
+        <p>Providing varying insights about the wildfires in U.S. such as cause and geographical location.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                Data Science / Python EDA (2022)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/us-wildfire-analysis" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+            <li>
+              <a href="https://www.kaggle.com/code/mehmetcandemir/us-wildfire-analysis-eda-and-answers" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- wgan-gp-trainer -->
+    <div class="project-box ai">
+      <a href="/img/projects/wgangp.jpeg" data-lightbox="wgangp">
+        <img src="/img/projects/wgangp.jpeg" alt="wgangp">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/wgan-gp-trainer" target="_blank">WGAN-GP Trainer</a></h3>
+        <p>A minimized, customizable GAN trainer built with PyTorch. Also it is cross-platform, you can run it on Windows too.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                AI / Python PyTorch (2022)
+              </p>
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/wgan-gp-trainer" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- grnn -->
+    <div class="project-box ai">
+      <a href="/img/projects/grnn.png" data-lightbox="grnn">
+        <img src="/img/projects/grnn.png" alt="grnn">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/general-regression-neural-networks" target="_blank">GRNN</a></h3>
+        <p>General Regression Neural Network built by scratch. It is one of the most primitive models. I'm planning to fix the bugs soon..</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                AI / Python Tkinter Sklearn (2020)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/general-regression-neural-networks" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+    
+    <!-- content-based-filtering -->
+    <div class="project-box ai">
+      <a href="/img/projects/cbf_recommender.png" data-lightbox="cbf-recommender">
+        <img src="/img/projects/cbf_recommender.png" alt="cbf-recommender">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/content-based-filtering" target="_blank">CBF Recommender</a></h3>
+        <p>A content-based movie recommender which uses cosine similarity to find similar movies. You can also add users with favorite movies.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                AI / Python Tkinter (2020)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/content-based-filtering" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- fenestration-cli -->
+    <div class="project-box app">
+      <a href="/img/projects/fenestration.png" data-lightbox="grnn">
+        <img src="/img/projects/fenestration.png" alt="fenestration">
+      </a>
+      <div class="project-description">
+        <h3><a href="https://github.com/mcandemir/fenestration-cli" target="_blank">Fenestration CLI</a></h3>
+        <p>A terminal application I built to store buildings' window components data. Both imperial and SI measurements are accepted.</p>
+        <br>
+        <div class="project-footer">
+          <ul>
+            <li>
+              <p>
+                CLI App / Python SQL (2019)
+              </p>  
+            </li>
+            <li>
+              <a href="https://github.com/mcandemir/fenestration-cli" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 
@@ -343,229 +475,58 @@
 <!-- ================================================================================== -->
 
 
+<section id="experience">
 
-<!-- My Work Section -->
-  <section id="mywork" class="section">
-    <div class="project-heading">
-      <h3><a href="#mywork" class="custom-underline">My Work</a></h3>
-      <hr>
-    </div>
+  <div id="content">
+    <h1 class="exp-header">My Experiences</h1>
+  
+    <ul class="timeline">
+      <li class="event" data-date="Jul 2023 - Dec 2023">
+        <h3>Data Scientist • Intern</h3>
+        <p>Doğuş Teknoloji</p>
+      </li>
+      <li class="event" data-date="Mar 2023 - Apr 2023">
+        <h3>Machine Learning Engineer • Volunteer</h3>
+        <p>Technology Development Group</p>    
+      </li>
+      <li class="event" data-date="Sep 2022">
+        <h3>Cukurova University • Graduate</h3>
+        <p>Cukurova University</p>    
+      </li>
+      <li class="event" data-date="Jun 2022 - Aug 2022">
+        <h3>Data Scientist • Intern</h3>
+        <p>Jotform</p>    
+      </li>
+      <li class="event" data-date="Sep 2021 - Jun 2022">
+        <h3>ML Engineer • Freelance</h3>
+        <p>Nutzentech</p>    
+      </li>
+      <li class="event" data-date="Dec 2020 - Mar 2021">
+        <h3>AI Engineer • Volunteer</h3>
+        <p>Apziva</p>    
+      </li>
+      <li class="event" data-date="Sep 2020 - Apr 2021">
+        <h3>ML Engineer • Volunteer</h3>
+        <p>Cukurova Hydromobile Team, Cukurova University</p>    
+      </li>
+      <li class="event" data-date="May 2020 - Sep 2020">
+        <h3>R&D Engineer • Freelance</h3>
+        <p>CENGA R&D Team, Cukurova University</p>    
+      </li>
+      <li class="event" data-date="Sep 2018">
+        <h3>Cukurova University Student</h3>
+        <p>Cukurova University</p>    
+      </li>
 
-    <!-- filter -->
-    <ul class="project-filter">
-      <li class="list project-filter-active" data-filter="all">All</li>
-      <li class="list" data-filter="datascience">Data Science</li>
-      <li class="list" data-filter="ai">AI</li>
-      <li class="list" data-filter="app">Application</li>
+
+
+
+
     </ul>
+  </div>
+  
 
-    <br>
-
-    <!-- container -->
-    <div class="project-container">
-
-      <!-- forecast-bus-demand -->
-      <div class="project-box datascience">
-        <a href="/img/projects/imdb-sentiment-analysis.png" data-lightbox="datascience">
-          <img src="/img/projects/imdb-sentiment-analysis.png" alt="imdb-sentiment-analysis">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/imdb-sentiment-analysis" target="_blank">IMDB Sentiment Analysis</a></h3>
-          <p>Performing sentimental analysis on 50K IMDB movies review data.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  Data Science / SentimentAnalysis (2023)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/imdb-sentiment-analysis" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-              <li>
-                <a href="https://www.kaggle.com/code/mehmetcandemir/imdb-sentiment-analysis-eda-tf-idf-90" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- forecast-bus-demand -->
-      <div class="project-box datascience">
-        <a href="/img/projects/bus_forecast.png" data-lightbox="datascience">
-          <img src="/img/projects/bus_forecast.png" alt="bus_forecast">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/forecast-bus-demand" target="_blank">Forecast Bus Demand</a></h3>
-          <p>Forecasting the demand of buses for 10 municipalities.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  Data Science / Python TimeSeries (2022)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/forecast-bus-demand" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- ames-house-prices -->
-      <div class="project-box datascience">
-        <a href="/img/projects/ames_house_prices.png" data-lightbox="datascience">
-          <img src="/img/projects/ames_house_prices.png" alt="ames-house-prices">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/ames-house-prices" target="_blank">Ames House Prices</a></h3>
-          <p>Predicting house prices via Ames Housing dataset using advanced regression techniques.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  Data Science / Python Regression (2022)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/ames-house-prices" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-              <li>
-                <a href="https://www.kaggle.com/code/mehmetcandemir/a-study-on-ames-housing-dataset-int-advanced" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- us-wildfire-analysis -->
-      <div class="project-box datascience">
-        <a href="/img/projects/us_wildfire_analysis.png" data-lightbox="datascience">
-          <img src="/img/projects/us_wildfire_analysis.png" alt="us-wildfire-analysis">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/us-wildfire-analysis" target="_blank">U.S. Wildfire Analysis</a></h3>
-          <p>Providing varying insights about the wildfires in U.S. such as cause and geographical location.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  Data Science / Python EDA (2022)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/us-wildfire-analysis" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-              <li>
-                <a href="https://www.kaggle.com/code/mehmetcandemir/us-wildfire-analysis-eda-and-answers" target="_blank"><i class="fa-brands fa-kaggle fa-xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- wgan-gp-trainer -->
-      <div class="project-box ai">
-        <a href="/img/projects/wgangp.jpeg" data-lightbox="wgangp">
-          <img src="/img/projects/wgangp.jpeg" alt="wgangp">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/wgan-gp-trainer" target="_blank">WGAN-GP Trainer</a></h3>
-          <p>A minimized, customizable GAN trainer built with PyTorch. Also it is cross-platform, you can run it on Windows too.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  AI / Python PyTorch (2022)
-                </p>
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/wgan-gp-trainer" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- grnn -->
-      <div class="project-box ai">
-        <a href="/img/projects/grnn.png" data-lightbox="grnn">
-          <img src="/img/projects/grnn.png" alt="grnn">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/general-regression-neural-networks" target="_blank">GRNN</a></h3>
-          <p>General Regression Neural Network built by scratch. It is one of the most primitive models. I'm planning to fix the bugs soon..</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  AI / Python Tkinter Sklearn (2020)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/general-regression-neural-networks" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> 
-      
-      <!-- content-based-filtering -->
-      <div class="project-box ai">
-        <a href="/img/projects/cbf_recommender.png" data-lightbox="cbf-recommender">
-          <img src="/img/projects/cbf_recommender.png" alt="cbf-recommender">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/content-based-filtering" target="_blank">CBF Recommender</a></h3>
-          <p>A content-based movie recommender which uses cosine similarity to find similar movies. You can also add users with favorite movies.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  AI / Python Tkinter (2020)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/content-based-filtering" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- fenestration-cli -->
-      <div class="project-box app">
-        <a href="/img/projects/fenestration.png" data-lightbox="grnn">
-          <img src="/img/projects/fenestration.png" alt="fenestration">
-        </a>
-        <div class="project-description">
-          <h3><a href="https://github.com/mcandemir/fenestration-cli" target="_blank">Fenestration CLI</a></h3>
-          <p>A terminal application I built to store buildings' window components data. Both imperial and SI measurements are accepted.</p>
-          <br>
-          <div class="project-footer">
-            <ul>
-              <li>
-                <p>
-                  CLI App / Python SQL (2019)
-                </p>  
-              </li>
-              <li>
-                <a href="https://github.com/mcandemir/fenestration-cli" target="_blank"><i class="fa-brands fa-github fa-2xl"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+</section>
 
 
 
