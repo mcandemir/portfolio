@@ -2,10 +2,11 @@
   background-color: #fff no-repeat center/cover;
   width: 100%;
   overflow: hidden;
+  padding-bottom: 1%;
 }
 
 .container-aboutme{
-  padding: 0 1rem;
+  padding-bottom: 0 1%;
 }
 
 .container-aboutme ul{
@@ -63,7 +64,8 @@
   }
 
   .aboutme-introduction{
-    margin: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 
   .container-aboutme ul{
