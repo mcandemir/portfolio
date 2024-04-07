@@ -9,15 +9,20 @@ body {
 strong {
   font-weight: 600;
 }
+
+#experience{
+  padding: 1%;
+}
+
 .exp-header {
   font-family: 'Robo Mono', monospace; 
   letter-spacing: 1.5px;
   color: #1a1a1a;
   font-weight: 100;
   font-size: 2.4em;
+  margin-top: 1%;
 }
 #content {
-  margin-top: 50px;
   /* max-width: 50%; */
   text-align: center;
 }
@@ -29,12 +34,14 @@ strong {
   background: rgba(255, 255, 255, 0.03);
   color: #1a1a1a;
   font-family: 'Robo Mono', monospace; 
-  margin: 50px auto;
+  margin: auto;
   letter-spacing: 0.5px;
   position: relative;
   line-height: 1.4em;
   font-size: 1.03em;
-  padding: 50px;
+  padding: 15px;
+  /* padding-left: 50px;
+  padding-bottom: 10px; */
   list-style: none;
   text-align: left;
   max-width: 40%;
@@ -48,8 +55,9 @@ strong {
 }
 .timeline .event {
   border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-  padding-bottom: 25px;
-  margin-bottom: 50px;
+  /* padding-bottom: 15px; */
+  margin-bottom: 25px;
+  padding-left: 15px;
   position: relative;
 }
 .timeline .event:last-of-type {
@@ -74,7 +82,7 @@ strong {
 }
 .timeline .event:after {
   box-shadow: 0 0 0 4px #4298c3;
-  left: -57.85px;
+  left: -23.25px;
   background: #1a1a1a;
   border-radius: 50%;
   height: 11px;
@@ -84,13 +92,19 @@ strong {
 }
 
 @media screen and (max-width: 780px) {
-    .timeline{
-        font-size: 13px;
+  .timeline{
+    padding: 15px;
+    max-width: 80%;
+  }
+  .timeline h3, p{
+    font-size: 14px;
+    /* margin: 1rem; */
+  }
+  .exp-header {
+    margin-top: 15%;
   }
 }
   
   @media screen and (max-height: 580px) {
-    .timeline{
-        font-size: 13px;
-  }
+
   }
