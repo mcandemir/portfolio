@@ -2,23 +2,23 @@ section#resume {
   /* background:linear-gradient(rgba(0, 0, 0, .88), rgba(0, 0, 0, 0.88)), */
 /* url('/img/bg/pexels-bich-tran-669996.jpg') no-repeat center/cover; */
 background-color: rgb(17, 16, 16);
-  padding:1rem 0;
+}
+
+.resume-pdf{
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .resume-pdf a{
   border-width: 2px;
   border-style: solid;
   border-radius: 15px;
-  padding: 15px;
   color: #fff;
 }
 
-.resume-pdf h3{
-  margin: 10%;
-}
 
 @media (hover: hover){
-  .resume-pdf h3:hover{
+  .resume-pdf h2:hover{
     transform: scale(1.2);
     transition: .4s;
   }
@@ -26,19 +26,19 @@ background-color: rgb(17, 16, 16);
 
 
 @media screen and (max-width: 800px) {
-  .resume-pdf h3{
+  .resume-pdf h2{
     display: inline-flex;
   }
 }
 
 @media screen and (max-width: 550px) {
-  .resume-pdf h3{
-    font-size: 2rem;
+  .resume-pdf h2{
+    font-size: 1rem;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .resume-pdf h3{
-    font-size: 1.5rem;
+  .resume-pdf h2{
+    font-size: 1rem;
   }
 }
