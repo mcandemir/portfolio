@@ -11,7 +11,8 @@
 
 .container-aboutme ul{
   display: flex;
-  margin: 5%;
+  margin: 4%;
+  margin-bottom: 0%;
 }
 
 .aboutme-introduction {
@@ -70,7 +71,6 @@
 
   .container-aboutme ul{
     display: inline;
-    margin: 5%;
   }
 
   .container-aboutme li{
@@ -87,7 +87,7 @@
   .container-aboutme ul{
     display: inline;
     text-align: center;
-    margin: 5%;
+    
   }
   .image-working{
     width: 50%;
