@@ -1,0 +1,32 @@
+name: Docker
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: docker
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker Login
+        env:
+          DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
+        run: |
+          docker login -u mcandemir -p $DOCKERHUB_TOKEN
+      - name: Docker Image Build
+        run: docker build -t ${{ github.repository }} .
+      - name: Docker Push
+        run: docker push ${{ github.repository }}
