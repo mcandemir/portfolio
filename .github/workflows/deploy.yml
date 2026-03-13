@@ -1,0 +1,24 @@
+# Deploy to server on push: git pull + docker compose up --build
+# Required secrets: SERVER_HOST, SERVER_USER, SSH_PRIVATE_KEY
+# Optional secret: DEPLOY_PATH (default: /opt/portfolio)
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]  # or [master] if that's your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH || '/opt/portfolio' }}
+            git pull origin ${{ github.ref_name }}
+            docker compose up -d --build
