@@ -110,17 +110,61 @@ const WELCOME = [
   "",
 ];
 
+const STORAGE_KEY = "portfolio-terminal-state";
+
+const storage = typeof window !== "undefined" ? localStorage : null;
+
+function loadTerminalState(): { history: CommandResult[]; commandHistory: string[] } | null {
+  if (!storage) return null;
+  try {
+    const raw = storage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { history: CommandResult[]; commandHistory: string[] };
+    if (Array.isArray(parsed.history) && Array.isArray(parsed.commandHistory)) {
+      return parsed;
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
+function saveTerminalState(history: CommandResult[], commandHistory: string[]) {
+  if (!storage) return;
+  try {
+    storage.setItem(STORAGE_KEY, JSON.stringify({ history, commandHistory }));
+  } catch {
+    /* ignore */
+  }
+}
+
 export default function Terminal() {
-  const [history, setHistory] = useState<CommandResult[]>([]);
+  const [history, setHistory] = useState<CommandResult[]>(() => {
+    const saved = loadTerminalState();
+    return saved?.history ?? [];
+  });
   const [input, setInput] = useState("");
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [commandHistory, setCommandHistory] = useState<string[]>(() => {
+    const saved = loadTerminalState();
+    return saved?.commandHistory ?? [];
+  });
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const historyRef = useRef(history);
+  const commandHistoryRef = useRef(commandHistory);
+  historyRef.current = history;
+  commandHistoryRef.current = commandHistory;
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [history]);
+
+  useEffect(() => {
+    if (history.length > 0 || commandHistory.length > 0) {
+      saveTerminalState(history, commandHistory);
+    }
+  }, [history, commandHistory]);
 
   const executeCommand = useCallback(
     (cmd: string) => {
@@ -138,7 +182,14 @@ export default function Terminal() {
       if (command === "cd" || command === "open") {
         const path = CD_PATHS[arg];
         if (path !== undefined) {
-          setCommandHistory((prev) => [...prev, cmd.trim()]);
+          const newHistory: CommandResult[] = [
+            ...historyRef.current,
+            { command: cmd.trim(), output: [] },
+          ];
+          const newCommandHistory = [...commandHistoryRef.current, cmd.trim()];
+          saveTerminalState(newHistory, newCommandHistory);
+          setHistory(newHistory);
+          setCommandHistory(newCommandHistory);
           window.location.href = path;
           return;
         }
@@ -187,10 +238,34 @@ export default function Terminal() {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const partial = input.trim().toLowerCase();
-      if (!partial) return;
+      const trimmed = input.trim().toLowerCase();
+      if (!trimmed) return;
+      const parts = trimmed.split(/\s+/);
+      const cmd = parts[0] ?? "";
+      const pathPartial = parts[1] ?? "";
+
+      // cd / open: complete path argument
+      if ((cmd === "cd" || cmd === "open") && parts.length >= 1) {
+        const pathKeys = Object.keys(CD_PATHS);
+        const matches = pathKeys.filter((p) => p.startsWith(pathPartial));
+        if (matches.length === 1) {
+          setInput(`${cmd} ${matches[0]}`);
+        } else if (matches.length > 1) {
+          const common = matches.reduce<string | null>((acc, p) => {
+            const rest = p.slice(pathPartial.length);
+            if (acc === null) return rest;
+            let i = 0;
+            while (i < acc.length && i < rest.length && acc[i] === rest[i]) i++;
+            return acc.slice(0, i);
+          }, null);
+          if (common) setInput(`${cmd} ${pathPartial}${common}`);
+        }
+        return;
+      }
+
+      // Command completion
       const allCommands = [...Object.keys(COMMANDS), "cd", "open"];
-      const match = allCommands.find((c) => c.startsWith(partial));
+      const match = allCommands.find((c) => c.startsWith(trimmed));
       if (match) setInput(match);
     }
   };
