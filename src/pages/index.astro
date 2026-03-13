@@ -21,52 +21,12 @@ const linkedinPosts = [...linkedinPostsData]
   .slice(0, 3);
 ---
 <BaseLayout title="Home">
-  <!-- Hero -->
-  <section class="py-16 space-y-6">
-    <div class="space-y-2">
-      <p class="font-mono text-sm text-terminal-green">Hello, I'm</p>
-      <h1 class="text-4xl sm:text-5xl font-bold text-terminal-text tracking-tight">
-        Can
-      </h1>
-      <p class="text-lg text-terminal-muted max-w-xl leading-relaxed">
-        Software engineer specializing in distributed systems, backend architecture, 
-        and developer tooling. I build things that scale.
-      </p>
-    </div>
-    <div class="flex flex-wrap gap-3">
-      <a
-        href="/projects"
-        class="font-mono text-sm px-4 py-2 bg-terminal-green/10 text-terminal-green border border-terminal-green/20 rounded hover:bg-terminal-green/20 transition-colors"
-      >
-        view projects →
-      </a>
-      <a
-        href="/experience"
-        class="font-mono text-sm px-4 py-2 bg-terminal-green/10 text-terminal-green border border-terminal-green/20 rounded hover:bg-terminal-green/20 transition-colors"
-      >
-        experiences →
-      </a>
-      <a
-        href="/lab"
-        class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors"
-      >
-        the lab →
-      </a>
-      <a
-        href="/blog"
-        class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors"
-      >
-        read blog →
-      </a>
-    </div>
-  </section>
-
   <!-- Terminal -->
   <section class="py-8">
     <h2 class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest">
       Interactive Terminal
     </h2>
-    <Terminal client:visible />
+    <Terminal client:load />
   </section>
 
   <!-- Featured Projects -->

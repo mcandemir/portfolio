@@ -89,8 +89,10 @@ const COMMANDS: Record<string, string[]> = {
 };
 
 const WELCOME = [
-  "Welcome to the interactive portfolio terminal.",
-  'Type "help" for available commands.',
+  "Hello, I'm Can — software engineer.",
+  "I build distributed systems, backend infrastructure, and developer tooling.",
+  "",
+  'Type "help" to explore, or "about" to learn more.',
   "",
 ];
 
@@ -174,7 +176,7 @@ export default function Terminal() {
       </div>
 
       {/* Terminal body */}
-      <div ref={scrollRef} className="p-4 h-80 overflow-y-auto space-y-2">
+      <div ref={scrollRef} className="p-4 h-[28rem] overflow-y-auto space-y-2">
         {/* Welcome message */}
         {WELCOME.map((line, i) => (
           <div key={`w-${i}`} className="text-terminal-muted leading-relaxed">
