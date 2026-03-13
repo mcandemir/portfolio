@@ -1,0 +1,57 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="space-y-8">
+    <!-- Breadcrumb -->
+    <nav class="font-mono text-xs text-terminal-muted">
+      <a href="/blog" class="hover:text-terminal-green transition-colors">~/blog</a>
+      <span class="mx-1">/</span>
+      <span class="text-terminal-text">{post.id}</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="space-y-4 pb-6 border-b border-terminal-border">
+      <h1 class="text-3xl font-bold text-terminal-text leading-tight">
+        {post.data.title}
+      </h1>
+      <p class="text-lg text-terminal-muted">{post.data.description}</p>
+      <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+        <time class="text-terminal-muted">
+          {post.data.date.toISOString().slice(0, 10)}
+        </time>
+        {post.data.readingTime && (
+          <>
+            <span class="text-terminal-muted/40">·</span>
+            <span class="text-terminal-muted">{post.data.readingTime} min read</span>
+          </>
+        )}
+        {post.data.tags.length > 0 && (
+          <>
+            <span class="text-terminal-muted/40">·</span>
+            {post.data.tags.map((tag) => (
+              <span class="text-terminal-green/60">#{tag}</span>
+            ))}
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose-terminal">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

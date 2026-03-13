@@ -1,0 +1,41 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { href: "/", label: "~" },
+  { href: "/projects", label: "projects" },
+  { href: "/experience", label: "experience" },
+  { href: "/lab", label: "lab" },
+  { href: "/blog", label: "blog" },
+  { href: "/linkedin", label: "linkedin" },
+];
+
+function isActive(href: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+}
+---
+<nav class="sticky top-0 z-50 backdrop-blur-md bg-terminal-bg/80 border-b border-terminal-border">
+  <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="/" class="font-mono text-sm text-terminal-green hover:text-terminal-green/80 transition-colors">
+      <span class="text-terminal-muted">can@portfolio</span><span class="text-terminal-green">:</span><span class="text-terminal-text">$</span>
+    </a>
+    <ul class="flex items-center gap-1">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              "font-mono text-xs px-3 py-1.5 rounded transition-all",
+              isActive(link.href)
+                ? "bg-terminal-green/10 text-terminal-green"
+                : "text-terminal-muted hover:text-terminal-text hover:bg-terminal-surface",
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>

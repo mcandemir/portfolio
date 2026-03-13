@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const experiences = (await getCollection("experience")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+---
+<BaseLayout title="Experience" description="Where I've worked and what I've built.">
+  <section class="space-y-8">
+    <div>
+      <h1 class="text-3xl font-bold text-terminal-text">Experience</h1>
+      <p class="font-mono text-sm text-terminal-muted mt-2">cat ~/.experience</p>
+    </div>
+
+    <div class="space-y-0">
+      {experiences.map((exp, i) => (
+        <div class="relative pl-8 pb-10 group">
+          {/* Timeline line */}
+          {i < experiences.length - 1 && (
+            <div class="absolute left-[11px] top-[22px] w-px h-full bg-terminal-border" />
+          )}
+          {/* Timeline dot */}
+          <div class="absolute left-1.5 top-[6px] w-3 h-3 rounded-full border-2 border-terminal-green bg-terminal-bg group-hover:bg-terminal-green/20 transition-colors" />
+
+          <div class="space-y-3">
+            <div>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2 class="text-xl font-semibold text-terminal-text">{exp.data.position}</h2>
+                <span class="font-mono text-sm text-terminal-green">@ {exp.data.company}</span>
+              </div>
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+                <span class="font-mono text-xs text-terminal-muted">
+                  {formatDate(exp.data.startDate)} — {exp.data.current ? "Present" : formatDate(exp.data.endDate!)}
+                </span>
+                <span class="font-mono text-xs text-terminal-muted/60">·</span>
+                <span class="font-mono text-xs text-terminal-muted">{exp.data.location}</span>
+              </div>
+            </div>
+
+            <ul class="space-y-1.5">
+              {exp.data.achievements.map((achievement) => (
+                <li class="flex items-start gap-2 text-sm text-terminal-text/80">
+                  <span class="text-terminal-green mt-0.5 shrink-0">▸</span>
+                  <span>{achievement}</span>
+                </li>
+              ))}
+            </ul>
+
+            {exp.data.techStack.length > 0 && (
+              <div class="flex flex-wrap gap-2">
+                {exp.data.techStack.map((tech) => (
+                  <span class="font-mono text-xs px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

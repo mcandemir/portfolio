@@ -1,0 +1,23 @@
+---
+title: "Portfolio Site"
+description: "This very site — a performant, statically-generated portfolio built with Astro, React islands, and a Go backend sidecar."
+techStack: ["Astro", "React", "TypeScript", "Tailwind CSS", "Go", "Docker"]
+role: "Designer & Developer"
+githubUrl: "https://github.com/username/portfolio"
+liveUrl: "https://portfolio.dev"
+impact: "100/100 Lighthouse score, <1s FCP, fully containerized"
+featured: true
+order: 3
+date: 2024-10-01
+---
+
+## Overview
+
+A personal portfolio and blog built for maximum performance and developer experience. Uses Astro's static output mode with React islands for interactive components like the terminal CLI on the homepage.
+
+## Stack Choices
+
+- **Astro** for static generation and content collections with Zod schema validation
+- **React** (island) for the interactive terminal component — only hydrated on the client
+- **Go + Gin** sidecar for dynamic API routes (contact form, analytics)
+- **Docker** multi-stage build for production deployment

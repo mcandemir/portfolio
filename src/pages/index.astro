@@ -1,0 +1,207 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Terminal from "@/components/Terminal";
+import { getCollection } from "astro:content";
+import { labProjects } from "@/data/lab-projects";
+import { linkedinPosts as linkedinPostsData } from "@/data/linkedin-posts";
+
+const allProjects = await getCollection("projects");
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+
+const recentPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const linkedinPosts = [...linkedinPostsData]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 3);
+---
+<BaseLayout title="Home">
+  <!-- Hero -->
+  <section class="py-16 space-y-6">
+    <div class="space-y-2">
+      <p class="font-mono text-sm text-terminal-green">Hello, I'm</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-terminal-text tracking-tight">
+        Can
+      </h1>
+      <p class="text-lg text-terminal-muted max-w-xl leading-relaxed">
+        Software engineer specializing in distributed systems, backend architecture, 
+        and developer tooling. I build things that scale.
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href="/projects"
+        class="font-mono text-sm px-4 py-2 bg-terminal-green/10 text-terminal-green border border-terminal-green/20 rounded hover:bg-terminal-green/20 transition-colors"
+      >
+        view projects →
+      </a>
+      <a
+        href="/experience"
+        class="font-mono text-sm px-4 py-2 bg-terminal-green/10 text-terminal-green border border-terminal-green/20 rounded hover:bg-terminal-green/20 transition-colors"
+      >
+        experiences →
+      </a>
+      <a
+        href="/lab"
+        class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors"
+      >
+        the lab →
+      </a>
+      <a
+        href="/blog"
+        class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors"
+      >
+        read blog →
+      </a>
+    </div>
+  </section>
+
+  <!-- Terminal -->
+  <section class="py-8">
+    <h2 class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest">
+      Interactive Terminal
+    </h2>
+    <Terminal client:visible />
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-12">
+    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+      Featured Projects
+    </h2>
+    <div class="grid gap-4">
+      {featuredProjects.map((project) => (
+        <a
+          href={`/projects/${project.id}`}
+          class="group block p-5 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-1.5">
+              <h3 class="font-semibold text-terminal-text group-hover:text-terminal-green transition-colors">
+                {project.data.title}
+              </h3>
+              <p class="text-sm text-terminal-muted leading-relaxed">
+                {project.data.description}
+              </p>
+              <div class="flex flex-wrap gap-2 pt-1">
+                {project.data.techStack.slice(0, 4).map((tech) => (
+                  <span class="font-mono text-xs px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <span class="font-mono text-xs text-terminal-green opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+              →
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <a
+      href="/projects"
+      class="font-mono text-xs text-terminal-green hover:underline mt-4 inline-block"
+    >
+      view all {allProjects.length} projects →
+    </a>
+  </section>
+
+  <!-- The Lab (preview) -->
+  <section class="py-12">
+    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+      The Lab
+    </h2>
+    <p class="text-sm text-terminal-muted mb-4">
+      Early experiments, CLI tools, and projects that shaped the path.
+    </p>
+    <div class="flex flex-wrap gap-2 mb-4">
+      {labProjects.slice(0, 8).map((p) => (
+        <a
+          href={p.githubUrl}
+          target="_blank"
+          rel="noopener"
+          class="font-mono text-xs px-2 py-1 bg-terminal-surface border border-terminal-border rounded hover:border-terminal-green/30 text-terminal-muted hover:text-terminal-green transition-colors"
+        >
+          {p.title}
+        </a>
+      ))}
+    </div>
+    <a
+      href="/lab"
+      class="font-mono text-xs text-terminal-green hover:underline"
+    >
+      view all {labProjects.length} lab projects →
+    </a>
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="py-12">
+    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+      Recent Posts
+    </h2>
+    <div class="space-y-3">
+      {recentPosts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="group flex items-baseline justify-between gap-4 py-2 border-b border-terminal-border/50 hover:border-terminal-green/30 transition-colors"
+        >
+          <span class="text-terminal-text group-hover:text-terminal-green transition-colors">
+            {post.data.title}
+          </span>
+          <span class="font-mono text-xs text-terminal-muted shrink-0">
+            {post.data.date.toISOString().slice(0, 10)}
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- LinkedIn -->
+  <section class="py-12">
+    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+      LinkedIn
+    </h2>
+    <p class="text-sm text-terminal-muted mb-4">
+      Posts and updates.{" "}
+      <a
+        href="https://www.linkedin.com/in/mcandemir9/"
+        target="_blank"
+        rel="noopener"
+        class="text-terminal-green hover:underline"
+      >
+        @mcandemir9
+      </a>
+    </p>
+    {linkedinPosts.length > 0 ? (
+      <div class="space-y-4">
+        {linkedinPosts.map((post) => (
+          <a
+            href="/linkedin"
+            class="block p-4 border border-terminal-border rounded-lg hover:border-terminal-green/30 transition-colors"
+          >
+            <div class="font-mono text-xs text-terminal-muted">
+              {post.title ?? "Post"} · {post.date}
+            </div>
+          </a>
+        ))}
+        <a href="/linkedin" class="font-mono text-xs text-terminal-green hover:underline">
+          view all posts →
+        </a>
+      </div>
+    ) : (
+      <a
+        href="https://www.linkedin.com/in/mcandemir9/"
+        target="_blank"
+        rel="noopener"
+        class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors inline-block"
+      >
+        follow on LinkedIn →
+      </a>
+    )}
+  </section>
+</BaseLayout>

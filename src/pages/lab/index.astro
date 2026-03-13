@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { labProjects } from "@/data/lab-projects";
+---
+<BaseLayout title="The Lab" description="Early experiments, CLI tools, and projects that shaped the path.">
+  <section class="space-y-8">
+    <div>
+      <h1 class="text-3xl font-bold text-terminal-text">The Lab</h1>
+      <p class="font-mono text-sm text-terminal-muted mt-2">
+        Early experiments, CLI tools, and projects that shaped the path.
+      </p>
+    </div>
+
+    <div class="grid gap-3">
+      {labProjects.map((project) => (
+        <a
+          href={project.githubUrl}
+          target="_blank"
+          rel="noopener"
+          class="group flex items-start justify-between gap-4 p-4 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+        >
+          <div class="space-y-1 min-w-0">
+            <h2 class="font-semibold text-terminal-text group-hover:text-terminal-green transition-colors truncate">
+              {project.title}
+            </h2>
+            <p class="text-sm text-terminal-muted leading-relaxed line-clamp-2">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1">
+              {project.tags.map((tag) => (
+                <span class="font-mono text-xs px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <span class="font-mono text-xs text-terminal-green shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            ↗
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

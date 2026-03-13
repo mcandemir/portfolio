@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+<BaseLayout title="404 — Not Found">
+  <section class="flex flex-col items-center justify-center py-24 text-center space-y-6">
+    <div class="font-mono space-y-2">
+      <p class="text-6xl font-bold text-terminal-green">404</p>
+      <p class="text-terminal-muted">
+        <span class="text-terminal-green">$</span> find / -name "page" -type f
+      </p>
+      <p class="text-terminal-muted text-sm mt-2">
+        find: no results found
+      </p>
+    </div>
+    <a
+      href="/"
+      class="font-mono text-sm px-4 py-2 bg-terminal-green/10 text-terminal-green border border-terminal-green/20 rounded hover:bg-terminal-green/20 transition-colors"
+    >
+      cd ~
+    </a>
+  </section>
+</BaseLayout>

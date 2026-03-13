@@ -1,0 +1,30 @@
+---
+title: "Distributed Cache"
+description: "A high-performance distributed caching layer built with Go, supporting consistent hashing and cluster-mode replication."
+techStack: ["Go", "Redis", "gRPC", "Docker", "Prometheus"]
+role: "Lead Engineer"
+githubUrl: "https://github.com/username/distributed-cache"
+impact: "Reduced API latency by 40% across 12 microservices, handling 50k+ req/s"
+featured: true
+order: 1
+date: 2024-06-15
+---
+
+## Overview
+
+Built a distributed caching layer that sits between application services and the primary datastore. Uses consistent hashing for key distribution and supports automatic failover.
+
+## Architecture
+
+The system implements a two-tier caching strategy:
+
+- **L1 (In-process):** Per-instance LRU cache for ultra-hot keys
+- **L2 (Distributed):** Redis Cluster with custom consistent hashing ring
+
+gRPC is used for inter-node communication, providing efficient binary serialization and streaming support for cache warming operations.
+
+## Key Decisions
+
+- Chose consistent hashing over simple modulo partitioning to minimize key redistribution during scaling events
+- Implemented write-behind caching with configurable flush intervals to balance consistency and throughput
+- Added Prometheus metrics for hit/miss ratios, latency percentiles, and cluster health

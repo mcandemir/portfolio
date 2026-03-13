@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-terminal-bg text-terminal-text font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-terminal-green/20 text-terminal-green;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-muted;
+  }
+}
+
+@layer components {
+  .prose-terminal {
+    @apply text-terminal-text/90 leading-relaxed;
+  }
+
+  .prose-terminal h1,
+  .prose-terminal h2,
+  .prose-terminal h3,
+  .prose-terminal h4 {
+    @apply text-terminal-text font-semibold mt-8 mb-4;
+  }
+
+  .prose-terminal h1 { @apply text-3xl; }
+  .prose-terminal h2 { @apply text-2xl; }
+  .prose-terminal h3 { @apply text-xl; }
+
+  .prose-terminal p {
+    @apply mb-4;
+  }
+
+  .prose-terminal a {
+    @apply text-terminal-green underline underline-offset-2 decoration-terminal-green/40 hover:decoration-terminal-green transition-colors;
+  }
+
+  .prose-terminal code {
+    @apply font-mono text-sm bg-terminal-surface px-1.5 py-0.5 rounded border border-terminal-border;
+  }
+
+  .prose-terminal pre {
+    @apply bg-terminal-surface border border-terminal-border rounded-lg p-4 overflow-x-auto mb-4;
+  }
+
+  .prose-terminal pre code {
+    @apply bg-transparent border-none p-0;
+  }
+
+  .prose-terminal ul, .prose-terminal ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose-terminal li {
+    @apply mb-1;
+  }
+
+  .prose-terminal ul li::marker {
+    @apply text-terminal-green;
+  }
+
+  .prose-terminal blockquote {
+    @apply border-l-2 border-terminal-green/50 pl-4 italic text-terminal-muted my-4;
+  }
+
+  .prose-terminal img {
+    @apply rounded-lg border border-terminal-border my-6;
+  }
+
+  .prose-terminal hr {
+    @apply border-terminal-border my-8;
+  }
+}
