@@ -22,3 +22,6 @@ Requires Caddy proxy on `proxy_net` for HTTPS. Frontend and backend are exposed 
 Push to `main` triggers GitHub Actions → SSH to server → `git pull` + `docker compose up -d --build`.
 
 Secrets: `SERVER_HOST`, `SERVER_USER`, `SSH_PRIVATE_KEY`, `DEPLOY_PATH`
+
+
+allright..
