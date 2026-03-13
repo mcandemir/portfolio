@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from "react";
+import { navigate } from "astro:transitions/client";
 
 type OutputLine =
   | string
@@ -111,6 +112,7 @@ const WELCOME = [
 ];
 
 const STORAGE_KEY = "portfolio-terminal-state";
+const FOCUS_KEY = "portfolio-terminal-focus";
 
 const storage = typeof window !== "undefined" ? localStorage : null;
 
@@ -138,7 +140,12 @@ function saveTerminalState(history: CommandResult[], commandHistory: string[]) {
   }
 }
 
-export default function Terminal() {
+interface TerminalProps {
+  /** When true, omit the title bar (used inside PersistentTerminal) */
+  embedded?: boolean;
+}
+
+export default function Terminal({ embedded = false }: TerminalProps) {
   const [history, setHistory] = useState<CommandResult[]>(() => {
     const saved = loadTerminalState();
     return saved?.history ?? [];
@@ -160,6 +167,18 @@ export default function Terminal() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [history]);
 
+  // Auto-focus on mount (first load + after cd/open navigation)
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(FOCUS_KEY)) {
+        sessionStorage.removeItem(FOCUS_KEY);
+      }
+      inputRef.current?.focus();
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   useEffect(() => {
     if (history.length > 0 || commandHistory.length > 0) {
       saveTerminalState(history, commandHistory);
@@ -178,9 +197,9 @@ export default function Terminal() {
         return;
       }
 
-      // cd / open — navigate to path
+      // cd / open — navigate to path (cd alone = home)
       if (command === "cd" || command === "open") {
-        const path = CD_PATHS[arg];
+        const path = arg ? CD_PATHS[arg] : CD_PATHS["home"];
         if (path !== undefined) {
           const newHistory: CommandResult[] = [
             ...historyRef.current,
@@ -190,7 +209,12 @@ export default function Terminal() {
           saveTerminalState(newHistory, newCommandHistory);
           setHistory(newHistory);
           setCommandHistory(newCommandHistory);
-          window.location.href = path;
+          try {
+            sessionStorage.setItem(FOCUS_KEY, "1");
+          } catch {
+            /* ignore */
+          }
+          navigate(path);
           return;
         }
         const output: OutputLine[] = path === undefined && arg
@@ -270,23 +294,11 @@ export default function Terminal() {
     }
   };
 
-  return (
+  const body = (
     <div
-      className="border border-terminal-border rounded-lg bg-terminal-surface overflow-hidden font-mono text-sm"
-      onClick={() => inputRef.current?.focus()}
+      ref={scrollRef}
+      className={`p-4 overflow-y-auto space-y-2 ${embedded ? "flex-1 min-h-0" : "h-[28rem]"}`}
     >
-      {/* Title bar */}
-      <div className="flex items-center gap-2 px-4 py-2.5 bg-terminal-bg border-b border-terminal-border">
-        <div className="flex gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-500/80" />
-          <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <span className="w-3 h-3 rounded-full bg-green-500/80" />
-        </div>
-        <span className="text-terminal-muted text-xs ml-2">can@portfolio ~ %</span>
-      </div>
-
-      {/* Terminal body */}
-      <div ref={scrollRef} className="p-4 h-[28rem] overflow-y-auto space-y-2">
         {/* Welcome message */}
         {WELCOME.map((line, i) => (
           <div key={`w-${i}`} className="text-terminal-muted leading-relaxed">
@@ -406,6 +418,30 @@ export default function Terminal() {
           </div>
         </div>
       </div>
+  );
+
+  if (embedded) {
+    return (
+      <div className="h-full min-h-0 flex flex-col" onClick={() => inputRef.current?.focus()}>
+        {body}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="border border-terminal-border rounded-lg bg-terminal-surface overflow-hidden font-mono text-sm"
+      onClick={() => inputRef.current?.focus()}
+    >
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-terminal-bg border-b border-terminal-border">
+        <div className="flex gap-1.5">
+          <span className="w-3 h-3 rounded-full bg-red-500/80" />
+          <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <span className="w-3 h-3 rounded-full bg-green-500/80" />
+        </div>
+        <span className="text-terminal-muted text-xs ml-2">can@portfolio ~ %</span>
+      </div>
+      {body}
     </div>
   );
 }

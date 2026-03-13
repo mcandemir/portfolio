@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Terminal from "@/components/Terminal";
 import { getCollection } from "astro:content";
 import { labProjects } from "@/data/lab-projects";
 import { linkedinPosts as linkedinPostsData } from "@/data/linkedin-posts";
@@ -21,14 +20,6 @@ const linkedinPosts = [...linkedinPostsData]
   .slice(0, 3);
 ---
 <BaseLayout title="Home">
-  <!-- Terminal -->
-  <section class="py-8">
-    <h2 class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest">
-      Interactive Terminal
-    </h2>
-    <Terminal client:load />
-  </section>
-
   <!-- Featured Projects -->
   <section class="py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
