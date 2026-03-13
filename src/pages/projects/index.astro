@@ -13,38 +13,51 @@ const projects = (await getCollection("projects")).sort(
       <p class="font-mono text-sm text-terminal-muted mt-2">ls ~/projects</p>
     </div>
 
-    <div class="grid gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {projects.map((project, i) => (
         <a
           href={`/projects/${project.id}`}
-          class="group block p-6 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+          class="group block border border-terminal-border rounded-lg overflow-hidden hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
         >
-          <div class="flex items-start gap-4">
-            <span class="font-mono text-sm text-terminal-green/60 mt-0.5 shrink-0">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div class="space-y-2 flex-1">
-              <div class="flex items-start justify-between gap-4">
-                <h2 class="text-xl font-semibold text-terminal-text group-hover:text-terminal-green transition-colors">
-                  {project.data.title}
-                </h2>
-                <span class="font-mono text-xs text-terminal-muted shrink-0">
-                  {project.data.role}
+          <div class="aspect-video bg-terminal-surface overflow-hidden relative">
+            {project.data.coverImage ? (
+              <img
+                src={project.data.coverImage}
+                alt={project.data.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center bg-terminal-bg border-b border-terminal-border">
+                <div class="flex flex-col items-center gap-2 text-terminal-muted/50">
+                  <div class="w-12 h-12 rounded border-2 border-dashed border-terminal-border flex items-center justify-center">
+                    <span class="font-mono text-lg text-terminal-green/40">{project.data.title.charAt(0)}</span>
+                  </div>
+                  <span class="font-mono text-[10px] uppercase tracking-wider">placeholder</span>
+                </div>
+              </div>
+            )}
+          </div>
+          <div class="p-5 space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <h2 class="text-lg font-semibold text-terminal-text group-hover:text-terminal-green transition-colors">
+                {project.data.title}
+              </h2>
+              <span class="font-mono text-xs text-terminal-muted shrink-0">
+                {project.data.role}
+              </span>
+            </div>
+            <p class="text-sm text-terminal-muted leading-relaxed line-clamp-2">
+              {project.data.description}
+            </p>
+            <p class="font-mono text-xs text-terminal-green/70">
+              ↳ {project.data.impact}
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1">
+              {project.data.techStack.slice(0, 4).map((tech) => (
+                <span class="font-mono text-xs px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">
+                  {tech}
                 </span>
-              </div>
-              <p class="text-terminal-muted leading-relaxed">
-                {project.data.description}
-              </p>
-              <p class="font-mono text-xs text-terminal-green/70">
-                ↳ {project.data.impact}
-              </p>
-              <div class="flex flex-wrap gap-2 pt-1">
-                {project.data.techStack.map((tech) => (
-                  <span class="font-mono text-xs px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </a>
