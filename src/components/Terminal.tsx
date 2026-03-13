@@ -1,43 +1,48 @@
 import { useState, useRef, useEffect, useCallback, type KeyboardEvent } from "react";
 
+type OutputLine =
+  | string
+  | { text: string; href?: string; command?: string }
+  | { command: string; description: string }; // help format: command in green, description muted
+
 interface CommandResult {
   command: string;
-  output: string[];
+  output: OutputLine[];
 }
 
-const COMMANDS: Record<string, string[]> = {
+const COMMANDS: Record<string, OutputLine[]> = {
   help: [
-    "Available commands:",
     "",
-    "  about       — Who am I?",
-    "  skills      — Technical skill set",
-    "  experience  — Work history",
-    "  projects    — Featured projects",
-  "  lab         — The Lab (early experiments)",
-    "  contact     — How to reach me",
-    "  blog        — Recent blog posts",
-    "  linkedin    — Embedded LinkedIn posts",
-    "  clear       — Clear terminal",
-    "  help        — Show this message",
+    { command: "about", description: "Who am I?" },
+    { command: "skills", description: "Technical skill set" },
+    { command: "experience", description: "Work history" },
+    { command: "projects", description: "Featured projects" },
+    { command: "lab", description: "The Lab (early experiments)" },
+    { command: "contact", description: "How to reach me" },
+    { command: "blog", description: "Recent blog posts" },
+    { command: "linkedin", description: "Embedded LinkedIn posts" },
     "",
-    'Type a command and press Enter. Try "about" to start.',
+    { command: "cd", description: "Navigate: cd projects, cd experience, cd lab, ..." },
+    { command: "clear", description: "Clear terminal" },
+    { command: "help", description: "Show this message" },
+    "",
+    "  Click a command or type and press Enter.",
   ],
   about: [
     "",
-    "       ┌─────────────────────────────────────┐",
-    "       │     Can · Software Engineer         │",
-    "       │     Yolda.com · Turkey              │",
-    "       ├─────────────────────────────────────┤",
-    "       │  Systems · Backend · Full-Stack     │",
-    "       │  Python · Go · TypeScript · ML      │",
-    "       ├─────────────────────────────────────┤",
-    "       │  Building high-performance          │",
-    "       │  distributed systems & tooling.     │",
-    "       │                                     │",
-    "       │  I love cats.                       │",
-    "       └─────────────────────────────────────┘",
+    "  Can Demir · Software Engineer @ Yolda.com · Turkey",
     "",
-    "       → mehmetcandemir.com",
+    "  Systems · Backend · Full-Stack",
+    "  Python · Go · TypeScript · ML",
+    "",
+    "  Building high-performance distributed systems & tooling.",
+    "  I love cats.",
+    "",
+    { text: "  → mehmetcandemir.com", href: "https://mehmetcandemir.com" },
+    { text: "  → experience", href: "/experience" },
+    { text: "  → projects", href: "/projects" },
+    { text: "  → GitHub", href: "https://github.com/mcandemir" },
+    { text: "  → LinkedIn", href: "https://linkedin.com/in/mcandemir9" },
     "",
   ],
   skills: [
@@ -48,51 +53,60 @@ const COMMANDS: Record<string, string[]> = {
     "Tools        → Git · CI/CD · Prometheus · Grafana · Vim",
   ],
   experience: [
-    "→ Navigate to /experience for full details",
+    { text: "→ /experience for full details", href: "/experience" },
     "",
     "  Senior Engineer    @ TechCorp       2023–present",
     "  Backend Developer  @ StartupXYZ     2021–2023",
     "  Software Intern    @ BigCo          2020–2021",
   ],
   projects: [
-    "→ Navigate to /projects for full details",
+    { text: "→ /projects for full details", href: "/projects" },
     "",
-    "  01  distributed-cache    Go · Redis cluster implementation",
-    "  02  portfolio-site       Astro · This very site",
-    "  03  cli-toolkit          Rust · Developer productivity tools",
+    { text: "  01  distributed-cache    Go · Redis cluster implementation", href: "/projects/distributed-cache" },
+    { text: "  02  portfolio-site       Astro · This very site", href: "/projects/portfolio-site" },
+    { text: "  03  cli-toolkit          Rust · Developer productivity tools", href: "/projects/cli-toolkit" },
   ],
   contact: [
     "Email     → (add your email)",
-    "GitHub    → github.com/mcandemir",
-    "LinkedIn  → linkedin.com/in/mcandemir9",
-    "Website   → mehmetcandemir.com",
+    { text: "GitHub    → github.com/mcandemir", href: "https://github.com/mcandemir" },
+    { text: "LinkedIn  → linkedin.com/in/mcandemir9", href: "https://linkedin.com/in/mcandemir9" },
+    { text: "Website   → mehmetcandemir.com", href: "https://mehmetcandemir.com" },
   ],
   lab: [
-    "→ Navigate to /lab for The Lab",
+    { text: "→ /lab for The Lab", href: "/lab" },
     "",
     "  Early experiments, CLI tools, and projects",
     "  that shaped the path. 20+ repos.",
   ],
   linkedin: [
-    "→ Navigate to /linkedin for embedded posts",
+    { text: "→ /linkedin for embedded posts", href: "/linkedin" },
     "",
-    "  Follow @mcandemir9 on LinkedIn",
+    { text: "  Follow @mcandemir9 on LinkedIn", href: "https://linkedin.com/in/mcandemir9" },
     "  for updates and thoughts.",
   ],
   blog: [
-    "→ Navigate to /blog for all posts",
+    { text: "→ /blog for all posts", href: "/blog" },
     "",
-    "  2024-10  Building a Terminal UI in React",
-    "  2024-09  Why I Moved from Node to Go",
-    "  2024-08  Content Collections in Astro 5",
+    { text: "  2024-10  Building a Terminal UI in React", href: "/blog/terminal-ui-react" },
+    { text: "  2024-09  Why I Moved from Node to Go", href: "/blog/node-to-go" },
   ],
+};
+
+const CD_PATHS: Record<string, string> = {
+  home: "/",
+  "~": "/",
+  projects: "/projects",
+  experience: "/experience",
+  lab: "/lab",
+  blog: "/blog",
+  linkedin: "/linkedin",
 };
 
 const WELCOME = [
   "Hello, I'm Can — software engineer.",
   "I build distributed systems, backend infrastructure, and developer tooling.",
   "",
-  'Type "help" to explore, or "about" to learn more.',
+  'Type "help" to explore. Use "cd projects" to navigate.',
   "",
 ];
 
@@ -110,17 +124,37 @@ export default function Terminal() {
 
   const executeCommand = useCallback(
     (cmd: string) => {
-      const trimmed = cmd.trim().toLowerCase();
+      const trimmed = cmd.trim();
+      const parts = trimmed.split(/\s+/);
+      const command = parts[0]?.toLowerCase() ?? "";
+      const arg = parts[1]?.toLowerCase() ?? "";
 
-      if (trimmed === "clear") {
+      if (command === "clear") {
         setHistory([]);
         return;
       }
 
-      const output = COMMANDS[trimmed];
+      // cd / open — navigate to path
+      if (command === "cd" || command === "open") {
+        const path = CD_PATHS[arg];
+        if (path !== undefined) {
+          setCommandHistory((prev) => [...prev, cmd.trim()]);
+          window.location.href = path;
+          return;
+        }
+        const output: OutputLine[] = path === undefined && arg
+          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, blog, linkedin"]
+          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, blog, linkedin"];
+        setHistory((prev) => [...prev, { command: cmd.trim(), output }]);
+        setCommandHistory((prev) => [...prev, cmd.trim()]);
+        setHistoryIndex(-1);
+        return;
+      }
+
+      const output = COMMANDS[command];
       const result: CommandResult = {
         command: cmd.trim(),
-        output: output ?? [`command not found: ${trimmed}`, 'Type "help" for available commands.'],
+        output: output ?? [`command not found: ${command}`, 'Type "help" for available commands.'],
       };
 
       setHistory((prev) => [...prev, result]);
@@ -155,7 +189,8 @@ export default function Terminal() {
       e.preventDefault();
       const partial = input.trim().toLowerCase();
       if (!partial) return;
-      const match = Object.keys(COMMANDS).find((c) => c.startsWith(partial));
+      const allCommands = [...Object.keys(COMMANDS), "cd", "open"];
+      const match = allCommands.find((c) => c.startsWith(partial));
       if (match) setInput(match);
     }
   };
@@ -192,17 +227,84 @@ export default function Terminal() {
               <span>{entry.command}</span>
             </div>
             <div className="mt-1 pl-4">
-              {entry.command.toLowerCase() === "about" ? (
-                <pre className="font-mono text-terminal-text/80 text-sm leading-relaxed whitespace-pre">
-                  {entry.output.join("\n")}
-                </pre>
+              {entry.command.toLowerCase().split(/\s+/)[0] === "about" ? (
+                <div className="font-mono text-terminal-text/80 text-sm leading-relaxed space-y-0.5">
+                  {entry.output.map((line, j) =>
+                    typeof line === "string" ? (
+                      <div key={j} className="whitespace-pre">{line || "\u00A0"}</div>
+                    ) : "href" in line && line.href ? (
+                      <a
+                        key={j}
+                        href={line.href}
+                        target={line.href.startsWith("http") ? "_blank" : undefined}
+                        rel={line.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="text-terminal-green hover:underline cursor-pointer whitespace-pre block"
+                      >
+                        {line.text}
+                      </a>
+                    ) : (
+                      <div key={j} className="whitespace-pre">{"text" in line ? line.text || "\u00A0" : "\u00A0"}</div>
+                    )
+                  )}
+                </div>
               ) : (
                 <div className="space-y-0.5">
-                  {entry.output.map((line, j) => (
-                    <div key={j} className="text-terminal-text/80 leading-relaxed">
-                      {line || "\u00A0"}
-                    </div>
-                  ))}
+                  {entry.output.map((line, j) => {
+                    if (typeof line === "string") {
+                      return (
+                        <div key={j} className="text-terminal-text/80 leading-relaxed">
+                          {line || "\u00A0"}
+                        </div>
+                      );
+                    }
+                    // help format: command (green) + description (muted)
+                    if ("description" in line && line.description !== undefined) {
+                      const cmd = ("  " + line.command).padEnd(13);
+                      return (
+                        <button
+                          key={j}
+                          type="button"
+                          onClick={() => executeCommand(line.command)}
+                          className="block w-full text-left leading-relaxed hover:opacity-90 cursor-pointer transition-opacity whitespace-nowrap font-mono group"
+                        >
+                          <span className="text-terminal-green group-hover:underline">{cmd}</span>
+                          <span className="text-terminal-muted">{line.description}</span>
+                        </button>
+                      );
+                    }
+                    if ("href" in line && line.href) {
+                      const isExternal = line.href.startsWith("http");
+                      return (
+                        <div key={j} className="text-terminal-text/80 leading-relaxed">
+                          <a
+                            href={line.href}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            className="text-terminal-green hover:underline cursor-pointer"
+                          >
+                            {line.text}
+                          </a>
+                        </div>
+                      );
+                    }
+                    if ("text" in line && line.command) {
+                      return (
+                        <button
+                          key={j}
+                          type="button"
+                          onClick={() => executeCommand(line.command!)}
+                          className="block w-full text-left text-terminal-text/80 leading-relaxed hover:text-terminal-green hover:underline cursor-pointer transition-colors whitespace-nowrap font-mono"
+                        >
+                          {line.text}
+                        </button>
+                      );
+                    }
+                    return (
+                      <div key={j} className="text-terminal-text/80 leading-relaxed">
+                        {"text" in line ? line.text || "\u00A0" : "\u00A0"}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
