@@ -33,6 +33,21 @@ const experience = defineCollection({
   }),
 });
 
+const voluntary = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/voluntary" }),
+  schema: z.object({
+    company: z.string(),
+    position: z.string(),
+    location: z.string(),
+    startDate: z.coerce.date(),
+    endDate: z.coerce.date().optional(),
+    current: z.boolean().default(false),
+    achievements: z.array(z.string()),
+    techStack: z.array(z.string()).default([]),
+    order: z.number().default(0),
+  }),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
   schema: z.object({
@@ -47,4 +62,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { projects, experience, blog };
+export const collections = { projects, experience, voluntary, blog };
