@@ -19,7 +19,7 @@ function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
-const recentPosts = (await getCollection("blog"))
+const recentAchievements = (await getCollection("achievements"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
@@ -147,15 +147,15 @@ const linkedinPosts = [...linkedinPostsData]
     </a>
   </section>
 
-  <!-- Recent Posts -->
+  <!-- Achievements -->
   <section class="py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      Recent Posts
+      Achievements
     </h2>
     <div class="space-y-3">
-      {recentPosts.map((post) => (
+      {recentAchievements.map((post) => (
         <a
-          href={`/blog/${post.id}`}
+          href={`/achievements/${post.id}`}
           class="group flex items-baseline justify-between gap-4 py-2 border-b border-terminal-border/50 hover:border-terminal-green/30 transition-colors"
         >
           <span class="text-terminal-text group-hover:text-terminal-green transition-colors">

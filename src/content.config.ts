@@ -48,8 +48,8 @@ const voluntary = defineCollection({
   }),
 });
 
-const blog = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
+const achievements = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/achievements" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -62,4 +62,4 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { projects, experience, voluntary, blog };
+export const collections = { projects, experience, voluntary, achievements };

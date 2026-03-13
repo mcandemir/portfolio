@@ -21,7 +21,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { command: "projects", description: "Featured projects" },
     { command: "lab", description: "The Lab (early experiments)" },
     { command: "contact", description: "How to reach me" },
-    { command: "blog", description: "Recent blog posts" },
+    { command: "achievements", description: "Talks, articles, milestones" },
     { command: "linkedin", description: "Embedded LinkedIn posts" },
     "",
     { command: "cd", description: "Navigate: cd projects, cd experience, cd volunteer, cd lab, ..." },
@@ -85,12 +85,22 @@ const COMMANDS: Record<string, OutputLine[]> = {
   volunteer: [
     { text: "→ /volunteer for full details", href: "/volunteer" },
     "",
-    "  Voluntary work, community contributions, and pro bono projects.",
+    "  Software Engineer Intern  @ Technology Dev Group  2023",
+    "  ML Engineer Contributor  @ UnifyAI               2022",
+    "  ML Engineer Freelancer   @ Nutzentech            2021–2022",
+    "  AI Engineer Intern       @ Apziva                2020–2021",
+    "  R&D ML Engineer          @ CENGA · Cukurova      2020–2021",
+    "  Computer Vision Engineer @ Cukurova Hydromobile  2019–2020",
   ],
   voluntary: [
     { text: "→ /volunteer for full details", href: "/volunteer" },
     "",
-    "  Voluntary work, community contributions, and pro bono projects.",
+    "  Software Engineer Intern  @ Technology Dev Group  2023",
+    "  ML Engineer Contributor  @ UnifyAI               2022",
+    "  ML Engineer Freelancer   @ Nutzentech            2021–2022",
+    "  AI Engineer Intern       @ Apziva                2020–2021",
+    "  R&D ML Engineer          @ CENGA · Cukurova      2020–2021",
+    "  Computer Vision Engineer @ Cukurova Hydromobile  2019–2020",
   ],
   linkedin: [
     { text: "→ /linkedin for embedded posts", href: "/linkedin" },
@@ -98,11 +108,11 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { text: "  Follow @mcandemir9 on LinkedIn", href: "https://linkedin.com/in/mcandemir9" },
     "  for updates and thoughts.",
   ],
-  blog: [
-    { text: "→ /blog for all posts", href: "/blog" },
+  achievements: [
+    { text: "→ /achievements for all", href: "/achievements" },
     "",
-    { text: "  2024-10  Building a Terminal UI in React", href: "/blog/terminal-ui-react" },
-    { text: "  2024-09  Why I Moved from Node to Go", href: "/blog/node-to-go" },
+    { text: "  2022  3rd Place · Smart City Adana Hackathon", href: "/achievements/smart-city-adana-hackathon-2022" },
+    { text: "  2020  2nd Place · TÜBİTAK Autonomous Car Efficiency Challenge", href: "/achievements/tubitak-efficiency-challenge-2020" },
   ],
 };
 
@@ -114,7 +124,7 @@ const CD_PATHS: Record<string, string> = {
   volunteer: "/volunteer",
   voluntary: "/volunteer",
   lab: "/lab",
-  blog: "/blog",
+  achievements: "/achievements",
   linkedin: "/linkedin",
 };
 
@@ -233,15 +243,16 @@ export default function Terminal({ embedded = false }: TerminalProps) {
           return;
         }
         const output: OutputLine[] = path === undefined && arg
-          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, blog, linkedin"]
-          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, blog, linkedin"];
+          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, achievements, linkedin"]
+          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, achievements, linkedin"];
         setHistory((prev) => [...prev, { command: cmd.trim(), output }]);
         setCommandHistory((prev) => [...prev, cmd.trim()]);
         setHistoryIndex(-1);
         return;
       }
 
-      const output = COMMANDS[command];
+      const resolvedCommand = (command === "ll" || command === "ls") ? "help" : command;
+      const output = COMMANDS[resolvedCommand];
       const result: CommandResult = {
         command: cmd.trim(),
         output: output ?? [`command not found: ${command}`, 'Type "help" for available commands.'],
@@ -287,23 +298,15 @@ export default function Terminal({ embedded = false }: TerminalProps) {
       if ((cmd === "cd" || cmd === "open") && parts.length >= 1) {
         const pathKeys = Object.keys(CD_PATHS);
         const matches = pathKeys.filter((p) => p.startsWith(pathPartial));
-        if (matches.length === 1) {
+        if (matches.length >= 1) {
+          // Single match: complete fully. Multiple: complete to first (alphabetically)
           setInput(`${cmd} ${matches[0]}`);
-        } else if (matches.length > 1) {
-          const common = matches.reduce<string | null>((acc, p) => {
-            const rest = p.slice(pathPartial.length);
-            if (acc === null) return rest;
-            let i = 0;
-            while (i < acc.length && i < rest.length && acc[i] === rest[i]) i++;
-            return acc.slice(0, i);
-          }, null);
-          if (common) setInput(`${cmd} ${pathPartial}${common}`);
         }
         return;
       }
 
       // Command completion
-      const allCommands = [...Object.keys(COMMANDS), "cd", "open"];
+      const allCommands = [...Object.keys(COMMANDS), "cd", "open", "ll", "ls"];
       const match = allCommands.find((c) => c.startsWith(trimmed));
       if (match) setInput(match);
     }

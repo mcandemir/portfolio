@@ -3,7 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("achievements");
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
@@ -17,7 +17,7 @@ const { Content } = await render(post);
   <article class="space-y-8">
     <!-- Breadcrumb -->
     <nav class="font-mono text-xs text-terminal-muted">
-      <a href="/blog" class="hover:text-terminal-green transition-colors">~/blog</a>
+      <a href="/achievements" class="hover:text-terminal-green transition-colors">~/achievements</a>
       <span class="mx-1">/</span>
       <span class="text-terminal-text">{post.id}</span>
     </nav>
