@@ -6,7 +6,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/chenjiandongx/ginprom"
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type ContactRequest struct {
@@ -35,6 +37,10 @@ func main() {
 
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery(), corsMiddleware())
+
+	// Prometheus metrics (exclude /metrics from request counting)
+	r.Use(ginprom.PromMiddleware(&ginprom.PromOpts{ExcludeRegexEndpoint: "^/metrics"}))
+	r.GET("/metrics", ginprom.PromHandler(promhttp.Handler()))
 
 	api := r.Group("/api/v1")
 	{
