@@ -5,7 +5,7 @@ location: "Istanbul, Türkiye"
 startDate: 2024-11-01
 current: true
 achievements:
-  - "Developed and automated a distance-based fleet fuel management system using TypeScript, Java and AWS services, preventing fraudulent fuel requests and saving the company $85k+ USD (+3M TRY) annually."
+  - "Developed and automated a distance-based fleet fuel management system using TypeScript, Java and AWS services, preventing fraudulent fuel requests and saving the company $660k+ USD (24M TRY) annually."
   - "Architected and maintained 30+ AWS Lambda services (300+ functions) using TypeScript, Java, and Python, migrated deprecated projects, reducing cold start latency by 40% and lowering execution costs."
   - "Designed and deployed serverless REST APIs with AWS API Gateway and Lambda, scaling to handle 1M+ daily requests with minimal latency and downtime."
   - "Built a real-time fleet tracking platform integrating GPS hardware with backend services, enabling live vehicle monitoring and operational visibility for logistics teams."
