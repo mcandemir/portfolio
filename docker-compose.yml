@@ -6,25 +6,6 @@ services:
       dockerfile: Dockerfile
     expose:
       - "80"
-    depends_on:
-      backend:
-        condition: service_started
-    restart: unless-stopped
-    networks:
-      - default
-      - proxy_net
-
-  backend:
-    container_name: portfolio-backend
-    build:
-      context: ./backend
-      dockerfile: ../Dockerfile.backend
-    expose:
-      - "8080"
-    environment:
-      - GIN_MODE=release
-      - PORT=8080
-      - ALLOWED_ORIGIN=https://mehmetcandemir.com
     restart: unless-stopped
     networks:
       - default

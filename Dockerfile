@@ -15,20 +15,7 @@ COPY public/ ./public/
 RUN npm run build
 
 # ============================================
-# Stage 2: Build Go backend
-# ============================================
-FROM golang:1.23-alpine AS backend-build
-
-WORKDIR /app
-
-COPY backend/go.mod backend/go.sum ./
-RUN go mod download
-
-COPY backend/ ./
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /server ./cmd/api
-
-# ============================================
-# Stage 3: Production — NGINX for static files
+# Stage 2: Production — NGINX for static files
 # ============================================
 FROM nginx:alpine AS production
 
