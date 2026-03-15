@@ -22,7 +22,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { command: "lab", description: "The Lab (early experiments)" },
     { command: "contact", description: "How to reach me" },
     { command: "achievements", description: "Talks, articles, milestones" },
-    { command: "linkedin", description: "Embedded LinkedIn posts" },
+    { command: "events", description: "Talks, meetups, conferences" },
     "",
     { command: "cd", description: "Navigate: cd projects, cd experience, cd volunteer, cd lab, ..." },
     { command: "clear", description: "Clear terminal" },
@@ -102,11 +102,8 @@ const COMMANDS: Record<string, OutputLine[]> = {
     "  R&D ML Engineer          @ CENGA · Cukurova      2020–2021",
     "  Computer Vision Engineer @ Cukurova Hydromobile  2019–2020",
   ],
-  linkedin: [
-    { text: "→ /linkedin for embedded posts", href: "/linkedin" },
-    "",
-    { text: "  Follow @mcandemir9 on LinkedIn", href: "https://linkedin.com/in/mcandemir9" },
-    "  for updates and thoughts.",
+  events: [
+    { text: "→ /events for talks, meetups, conferences", href: "/events" },
   ],
   achievements: [
     { text: "→ /achievements for all", href: "/achievements" },
@@ -125,7 +122,7 @@ const CD_PATHS: Record<string, string> = {
   voluntary: "/volunteer",
   lab: "/lab",
   achievements: "/achievements",
-  linkedin: "/linkedin",
+  events: "/events",
 };
 
 const WELCOME = [
@@ -243,8 +240,8 @@ export default function Terminal({ embedded = false }: TerminalProps) {
           return;
         }
         const output: OutputLine[] = path === undefined && arg
-          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, achievements, linkedin"]
-          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, achievements, linkedin"];
+          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, achievements, events"]
+          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, achievements, events"];
         setHistory((prev) => [...prev, { command: cmd.trim(), output }]);
         setCommandHistory((prev) => [...prev, cmd.trim()]);
         setHistoryIndex(-1);

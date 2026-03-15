@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { labProjects } from "@/data/lab-projects";
-import { linkedinPosts as linkedinPostsData } from "@/data/linkedin-posts";
+import { events as eventsData } from "@/data/events";
 
 const allProjects = await getCollection("projects");
 const featuredProjects = allProjects
@@ -24,7 +24,7 @@ const recentAchievements = (await getCollection("achievements"))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const linkedinPosts = [...linkedinPostsData]
+const recentEvents = [...eventsData]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 ---
@@ -169,46 +169,36 @@ const linkedinPosts = [...linkedinPostsData]
     </div>
   </section>
 
-  <!-- LinkedIn -->
+  <!-- Events -->
   <section class="py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      LinkedIn
+      Events
     </h2>
     <p class="text-sm text-terminal-muted mb-4">
-      Posts and updates.{" "}
-      <a
-        href="https://www.linkedin.com/in/mcandemir9/"
-        target="_blank"
-        rel="noopener"
-        class="text-terminal-green hover:underline"
-      >
-        @mcandemir9
-      </a>
+      Talks, meetups, and conferences I've attended.
     </p>
-    {linkedinPosts.length > 0 ? (
+    {recentEvents.length > 0 ? (
       <div class="space-y-4">
-        {linkedinPosts.map((post) => (
+        {recentEvents.map((event) => (
           <a
-            href="/linkedin"
+            href="/events"
             class="block p-4 border border-terminal-border rounded-lg hover:border-terminal-green/30 transition-colors"
           >
             <div class="font-mono text-xs text-terminal-muted">
-              {post.title ?? "Post"} · {post.date}
+              {event.title} · {event.date}
             </div>
           </a>
         ))}
-        <a href="/linkedin" class="font-mono text-xs text-terminal-green hover:underline">
-          view all posts →
+        <a href="/events" class="font-mono text-xs text-terminal-green hover:underline">
+          view all events →
         </a>
       </div>
     ) : (
       <a
-        href="https://www.linkedin.com/in/mcandemir9/"
-        target="_blank"
-        rel="noopener"
+        href="/events"
         class="font-mono text-sm px-4 py-2 text-terminal-muted border border-terminal-border rounded hover:text-terminal-text hover:border-terminal-muted transition-colors inline-block"
       >
-        follow on LinkedIn →
+        view events →
       </a>
     )}
   </section>
