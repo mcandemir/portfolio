@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio site built with Astro + Go backend.
+Personal portfolio site built with Astro.
 
 ## Local development
 

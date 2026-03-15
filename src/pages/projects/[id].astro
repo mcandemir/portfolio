@@ -1,16 +1,49 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
+import { marked } from "marked";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  return projects.map((project) => ({
-    params: { id: project.id },
-    props: { project },
-  }));
+  const paths = await Promise.all(
+    projects.map(async (project) => {
+      let readmeHtml: string | null = null;
+      if (project.data.useReadme && project.data.githubUrl) {
+        const match = project.data.githubUrl.match(/github\.com\/([^/]+)\/([^/]+?)(?:\/|$)/);
+        if (match) {
+          const [_, owner, repo] = match;
+          for (const branch of ["main", "master"]) {
+            try {
+              const res = await fetch(
+                `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/README.md`,
+              );
+              if (res.ok) {
+                const raw = await res.text();
+                const base = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}`;
+                const withImages = raw.replace(
+                  /!\[([^\]]*)\]\(([^)]+)\)/g,
+                  (_, alt, src) =>
+                    `![${alt}](${src.startsWith("http") ? src : `${base}/${src.replace(/^\//, "")}`})`,
+                );
+                readmeHtml = await marked(withImages);
+                break;
+              }
+            } catch {
+              /* try next branch */
+            }
+          }
+        }
+      }
+      return {
+        params: { id: project.id },
+        props: { project, readmeHtml },
+      };
+    }),
+  );
+  return paths;
 }
 
-const { project } = Astro.props;
+const { project, readmeHtml } = Astro.props;
 const { Content } = await render(project);
 ---
 <BaseLayout title={project.data.title} description={project.data.description}>
@@ -76,9 +109,24 @@ const { Content } = await render(project);
       </div>
     </header>
 
+    <!-- Cover Image (only when not using README) -->
+    {project.data.coverImage && !readmeHtml && (
+      <figure class="rounded-lg overflow-hidden border border-terminal-border">
+        <img
+          src={project.data.coverImage}
+          alt={project.data.title}
+          class="w-full h-auto object-cover"
+        />
+      </figure>
+    )}
+
     <!-- Content -->
     <div class="prose-terminal">
-      <Content />
+      {readmeHtml ? (
+        <div set:html={readmeHtml} />
+      ) : (
+        <Content />
+      )}
     </div>
   </article>
 </BaseLayout>

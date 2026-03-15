@@ -4,12 +4,6 @@
  */
 export const labProjects = [
   {
-    title: "WGAN-GP Trainer",
-    description: "Wasserstein GAN with gradient penalty — PyTorch training app for generative models (cat faces, celeb faces).",
-    githubUrl: "https://github.com/mcandemir/wgan-gp-trainer",
-    tags: ["Python", "PyTorch", "GAN"],
-  },
-  {
     title: "Streamlit Project Template",
     description: "A streamlit project template for cleaner code and cost-efficient maintainable apps.",
     githubUrl: "https://github.com/mcandemir/streamlit-project-template",

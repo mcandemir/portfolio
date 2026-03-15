@@ -48,9 +48,9 @@ const COMMANDS: Record<string, OutputLine[]> = {
     "",
   ],
   skills: [
-    "Languages    → Go · Rust · TypeScript · Python · SQL",
-    "Backend      → Gin · gRPC · REST · GraphQL · PostgreSQL · Redis",
-    "Frontend     → React · Astro · Tailwind · Next.js",
+    "Languages    → Java · Go · TypeScript · Python · SQL",
+    "Backend      → Gin · gRPC · REST · MongoDB · PostgreSQL · Redis",
+    "Frontend     → React · Next.js · Tailwind · Astro",
     "Infra        → Docker · Kubernetes · Terraform · AWS · GCP",
     "Tools        → Git · CI/CD · Prometheus · Grafana · Vim",
   ],
@@ -61,14 +61,11 @@ const COMMANDS: Record<string, OutputLine[]> = {
     "  Backend Dev & Instructor @ Cosmios Academy  2024",
     "  Data Science Intern   @ Dogus Teknoloji      2023–2024",
     "  Data Science Intern   @ Jotform              2023",
-    "  Backend Developer     @ StartupXYZ           2021–2022",
   ],
   projects: [
     { text: "→ /projects for full details", href: "/projects" },
     "",
-    { text: "  01  distributed-cache    Go · Redis cluster implementation", href: "/projects/distributed-cache" },
-    { text: "  02  portfolio-site       Astro · This very site", href: "/projects/portfolio-site" },
-    { text: "  03  cli-toolkit          Rust · Developer productivity tools", href: "/projects/cli-toolkit" },
+    { text: "  01  wgan-gp-trainer      PyTorch · GAN training for generative models", href: "/projects/wgan-gp-trainer" },
   ],
   contact: [
     "Email     → (add your email)",
