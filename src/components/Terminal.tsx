@@ -421,13 +421,13 @@ export default function Terminal({ embedded = false }: TerminalProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              style={{ width: `${Math.max(1, input.length + 1)}ch` }}
+              style={{ width: `${Math.max(1, input.length)}ch` }}
               className="bg-transparent outline-none text-terminal-text caret-transparent p-0"
               autoComplete="off"
               spellCheck={false}
               aria-label="Terminal input"
             />
-            <span className="w-2 h-4 bg-terminal-green animate-blink shrink-0 -ml-0.5" />
+            <span className="w-2 h-4 bg-terminal-green animate-blink shrink-0" />
           </div>
         </div>
       </div>
