@@ -69,7 +69,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { text: "  02  this-site            This site · Astro, React, Prometheus, Grafana", href: "/projects/portfolio" },
   ],
   contact: [
-    "Email     → (add your email)",
+    { text: "Email     → mhmtcndmr01@gmail.com", href: "mailto:mhmtcndmr01@gmail.com" },
     { text: "GitHub    → github.com/mcandemir", href: "https://github.com/mcandemir" },
     { text: "LinkedIn  → linkedin.com/in/mcandemir9", href: "https://linkedin.com/in/mcandemir9" },
     { text: "Website   → mehmetcandemir.com", href: "https://mehmetcandemir.com" },
