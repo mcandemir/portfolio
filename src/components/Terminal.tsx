@@ -66,6 +66,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { text: "→ /projects for full details", href: "/projects" },
     "",
     { text: "  01  wgan-gp-trainer      PyTorch · GAN training for generative models", href: "/projects/wgan-gp-trainer" },
+    { text: "  02  this-site            This site · Astro, React, Prometheus, Grafana", href: "/projects/portfolio" },
   ],
   contact: [
     "Email     → (add your email)",

@@ -1,0 +1,40 @@
+---
+title: "This Site"
+description: "Terminal-style portfolio site — Astro, React, Docker, with Prometheus and Grafana for observability."
+techStack: ["Astro", "React", "TypeScript", "Tailwind", "Docker", "NGINX", "Prometheus", "Grafana"]
+role: "Solo Developer"
+githubUrl: "https://github.com/mcandemir/portfolio"
+liveUrl: "https://mehmetcandemir.com"
+impact: "Full-stack portfolio with CI/CD, containerized deploy, and monitoring dashboards"
+featured: true
+order: 2
+date: 2025-03-01
+coverImage: "/images/projects/portfolio.png"
+useReadme: false
+---
+
+## Overview
+
+This site — a terminal-style portfolio built with Astro and React. Content-driven (MDX), interactive CLI navigation, and deployed as a static build behind NGINX in Docker. Observability via **Prometheus** and **Grafana** for metrics and dashboards.
+
+## Stack
+
+- **Frontend** — Astro, React, TypeScript, Tailwind CSS
+- **Build** — Vite, Sharp (image optimization)
+- **Runtime** — NGINX (static hosting)
+- **Infra** — Docker, Docker Compose, Caddy (HTTPS)
+- **CI/CD** — GitHub Actions (SSH deploy)
+- **Observability** — Prometheus, Grafana
+
+## Monitoring
+
+Prometheus scrapes Caddy (proxy traffic), Node Exporter (host metrics), and fail2ban. Grafana dashboards show request rate, latency, and per-host breakdown.
+
+![Grafana dashboard](/images/projects/grafana-dashboard.png)
+
+## Features
+
+- **Terminal UI** — Commands like `about`, `skills`, `experience`, `projects`, `lab`
+- **View Transitions** — Astro page transitions
+- **Dynamic README** — Fetches project READMEs from GitHub at build time
+- **SEO** — Sitemap, Open Graph, canonical URLs
