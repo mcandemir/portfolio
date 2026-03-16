@@ -52,7 +52,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
     "Backend      → Gin · gRPC · REST · MongoDB · PostgreSQL · Redis",
     "Frontend     → React · Next.js · Tailwind · Astro",
     "Infra        → Docker · Kubernetes · Terraform · AWS · GCP",
-    "Tools        → Git · CI/CD · Prometheus · Grafana · Vim",
+    "AI/ML        → PyTorch · LLMs · CV · GANs · RAG · Cursor · Copilot",
   ],
   experience: [
     { text: "→ /experience for full details", href: "/experience" },
@@ -125,7 +125,7 @@ const CD_PATHS: Record<string, string> = {
 
 const WELCOME = [
   "Hello, I'm Can — software engineer.",
-  "I build distributed systems, backend infrastructure, and developer tooling.",
+  "I build distributed systems, backend infrastructure, and AI-powered solutions.",
   "",
   'Type "help" to explore. Use "cd projects" to navigate.',
   "",
