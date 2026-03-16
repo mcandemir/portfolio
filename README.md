@@ -60,9 +60,6 @@ Requires Caddy (or similar) on `proxy_net` for HTTPS. The frontend is exposed in
 
 Push to `master` triggers GitHub Actions → SSH to server → `git pull` + `docker compose up -d --build`.
 
-**Required secrets:** `SERVER_HOST`, `SERVER_USER`, `SSH_PRIVATE_KEY`  
-**Optional:** `DEPLOY_PATH` (default: `/opt/portfolio`)
-
 ---
 
 ## Scripts
@@ -78,4 +75,4 @@ Push to `master` triggers GitHub Actions → SSH to server → `git pull` + `doc
 
 ## License
 
-Private — personal portfolio.
+Personal -dream- portfolio.
