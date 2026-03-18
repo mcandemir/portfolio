@@ -17,11 +17,13 @@ function isActive(href: string): boolean {
 }
 ---
 <nav class="sticky top-0 z-50 backdrop-blur-md bg-terminal-bg/80 border-b border-terminal-border">
-  <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-    <a href="/" class="font-mono text-sm text-terminal-green hover:text-terminal-green/80 transition-colors">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+    <a href="/" class="font-mono text-sm text-terminal-green hover:text-terminal-green/80 transition-colors shrink-0">
       <span class="text-terminal-muted">can@portfolio</span><span class="text-terminal-green">:</span><span class="text-terminal-text">$</span>
     </a>
-    <ul class="flex items-center gap-1">
+
+    <!-- Desktop nav: hidden on mobile -->
+    <ul class="hidden md:flex items-center gap-1">
       {links.map((link) => (
         <li>
           <a
@@ -38,5 +40,103 @@ function isActive(href: string): boolean {
         </li>
       ))}
     </ul>
+
+    <!-- Mobile menu button -->
+    <button
+      type="button"
+      id="nav-menu-btn"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Toggle menu"
+      class="md:hidden p-2 -m-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-terminal-muted hover:text-terminal-text hover:bg-terminal-surface rounded transition-colors"
+    >
+      <svg id="nav-menu-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="nav-close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div
+    id="nav-menu"
+    class="md:hidden border-t border-terminal-border bg-terminal-bg/95 backdrop-blur-md max-h-0 overflow-hidden transition-[max-height] duration-200 ease-out"
+    aria-hidden="true"
+  >
+    <ul class="px-4 py-3 space-y-1">
+      {links.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              "block font-mono text-sm px-3 py-2.5 rounded transition-all",
+              isActive(link.href)
+                ? "bg-terminal-green/10 text-terminal-green"
+                : "text-terminal-muted hover:text-terminal-text hover:bg-terminal-surface",
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 </nav>
+
+<script>
+  function initNavMenu() {
+    const btn = document.getElementById("nav-menu-btn");
+    const menu = document.getElementById("nav-menu");
+    const menuIcon = document.getElementById("nav-menu-icon");
+    const closeIcon = document.getElementById("nav-close-icon");
+
+    if (!btn || !menu || !menuIcon || !closeIcon) return;
+
+    const closeMenu = () => {
+      btn.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-hidden", "true");
+      menu.classList.add("max-h-0");
+      menu.classList.remove("max-h-[320px]");
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+    };
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+      menu.setAttribute("aria-hidden", String(expanded));
+      menu.classList.toggle("max-h-0", expanded);
+      menu.classList.toggle("max-h-[320px]", !expanded);
+      menuIcon.classList.toggle("hidden", !expanded);
+      closeIcon.classList.toggle("hidden", expanded);
+    });
+
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", closeMenu);
+    });
+  }
+
+  function closeNavMenu() {
+    const btn = document.getElementById("nav-menu-btn");
+    const menu = document.getElementById("nav-menu");
+    const menuIcon = document.getElementById("nav-menu-icon");
+    const closeIcon = document.getElementById("nav-close-icon");
+    if (btn && menu && menuIcon && closeIcon) {
+      btn.setAttribute("aria-expanded", "false");
+      menu.setAttribute("aria-hidden", "true");
+      menu.classList.add("max-h-0");
+      menu.classList.remove("max-h-[320px]");
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+    }
+  }
+
+  const mq = window.matchMedia("(min-width: 768px)");
+  mq.addEventListener("change", (e) => {
+    if (e.matches) closeNavMenu();
+  });
+
+  document.addEventListener("astro:page-load", initNavMenu);
+</script>

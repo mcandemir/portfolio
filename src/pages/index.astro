@@ -31,13 +31,13 @@ const recentEvents = [...eventsData]
 <BaseLayout title="Home">
   <!-- Experience -->
   {latestExperience && (
-    <section class="pb-12 pt-2 animate-fade-in">
+    <section class="pb-8 sm:pb-12 pt-2 animate-fade-in">
       <h2 class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest">
         Experience
       </h2>
       <a
         href="/experience"
-        class="group block p-5 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+        class="group block p-4 sm:p-5 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
       >
         <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 class="text-xl font-semibold text-terminal-text group-hover:text-terminal-green transition-colors">
@@ -78,7 +78,7 @@ const recentEvents = [...eventsData]
   )}
 
   <!-- Featured Projects -->
-  <section class="py-12">
+  <section class="py-8 sm:py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
       Featured Projects
     </h2>
@@ -86,7 +86,7 @@ const recentEvents = [...eventsData]
       {featuredProjects.map((project) => (
         <a
           href={`/projects/${project.id}`}
-          class="group block p-5 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+          class="group block p-4 sm:p-5 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
         >
           <div class="flex items-start justify-between gap-4">
             <div class="space-y-1.5">
@@ -120,7 +120,7 @@ const recentEvents = [...eventsData]
   </section>
 
   <!-- The Lab (preview) -->
-  <section class="py-12">
+  <section class="py-8 sm:py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
       The Lab
     </h2>
@@ -148,7 +148,7 @@ const recentEvents = [...eventsData]
   </section>
 
   <!-- Achievements -->
-  <section class="py-12">
+  <section class="py-8 sm:py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
       Achievements
     </h2>
@@ -156,7 +156,7 @@ const recentEvents = [...eventsData]
       {recentAchievements.map((post) => (
         <a
           href={`/achievements/${post.id}`}
-          class="group flex items-baseline justify-between gap-4 py-2 border-b border-terminal-border/50 hover:border-terminal-green/30 transition-colors"
+          class="group flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4 py-3 sm:py-2 border-b border-terminal-border/50 hover:border-terminal-green/30 transition-colors"
         >
           <span class="text-terminal-text group-hover:text-terminal-green transition-colors">
             {post.data.title}
@@ -170,7 +170,7 @@ const recentEvents = [...eventsData]
   </section>
 
   <!-- Events -->
-  <section class="py-12">
+  <section class="py-8 sm:py-12">
     <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
       Events
     </h2>

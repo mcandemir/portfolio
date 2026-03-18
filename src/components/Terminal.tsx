@@ -310,7 +310,7 @@ export default function Terminal({ embedded = false }: TerminalProps) {
   const body = (
     <div
       ref={scrollRef}
-      className={`p-4 overflow-y-auto space-y-2 ${embedded ? "flex-1 min-h-0" : "h-[28rem]"}`}
+      className={`p-3 sm:p-4 overflow-y-auto overflow-x-hidden space-y-2 ${embedded ? "flex-1 min-h-0" : "h-[20rem] sm:h-[28rem]"}`}
     >
         {/* Welcome message */}
         {WELCOME.map((line, i) => (
@@ -365,7 +365,7 @@ export default function Terminal({ embedded = false }: TerminalProps) {
                           key={j}
                           type="button"
                           onClick={() => executeCommand(line.command)}
-                          className="block w-full text-left leading-relaxed hover:opacity-90 cursor-pointer transition-opacity whitespace-nowrap font-mono group"
+                          className="block w-full text-left leading-relaxed hover:opacity-90 cursor-pointer transition-opacity font-mono group break-words"
                         >
                           <span className="text-terminal-green group-hover:underline">{cmd}</span>
                           <span className="text-terminal-muted">{line.description}</span>
@@ -393,7 +393,7 @@ export default function Terminal({ embedded = false }: TerminalProps) {
                           key={j}
                           type="button"
                           onClick={() => executeCommand(line.command!)}
-                          className="block w-full text-left text-terminal-text/80 leading-relaxed hover:text-terminal-green hover:underline cursor-pointer transition-colors whitespace-nowrap font-mono"
+                          className="block w-full text-left text-terminal-text/80 leading-relaxed hover:text-terminal-green hover:underline cursor-pointer transition-colors font-mono break-words"
                         >
                           {line.text}
                         </button>

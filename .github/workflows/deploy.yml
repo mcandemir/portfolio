@@ -20,7 +20,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ${{ secrets.DEPLOY_PATH || '/opt/portfolio' }}
+            cd ${{ secrets.DEPLOY_PATH }}
             git fetch origin
             git reset --hard origin/${{ github.ref_name }}
             docker compose up -d --build

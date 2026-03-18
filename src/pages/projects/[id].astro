@@ -57,8 +57,8 @@ const { Content } = await render(project);
 
     <!-- Header -->
     <header class="space-y-4">
-      <h1 class="text-3xl font-bold text-terminal-text">{project.data.title}</h1>
-      <p class="text-lg text-terminal-muted leading-relaxed">{project.data.description}</p>
+      <h1 class="text-2xl sm:text-3xl font-bold text-terminal-text">{project.data.title}</h1>
+      <p class="text-base sm:text-lg text-terminal-muted leading-relaxed">{project.data.description}</p>
 
       <div class="flex flex-wrap items-center gap-3 pt-2">
         {project.data.githubUrl && (

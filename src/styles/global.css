@@ -55,9 +55,9 @@
     @apply text-terminal-text font-semibold mt-8 mb-4;
   }
 
-  .prose-terminal h1 { @apply text-3xl; }
-  .prose-terminal h2 { @apply text-2xl; }
-  .prose-terminal h3 { @apply text-xl; }
+  .prose-terminal h1 { @apply text-2xl sm:text-3xl; }
+  .prose-terminal h2 { @apply text-xl sm:text-2xl; }
+  .prose-terminal h3 { @apply text-lg sm:text-xl; }
 
   .prose-terminal p {
     @apply mb-4;
@@ -68,11 +68,11 @@
   }
 
   .prose-terminal code {
-    @apply font-mono text-sm bg-terminal-surface px-1.5 py-0.5 rounded border border-terminal-border;
+    @apply font-mono text-xs sm:text-sm bg-terminal-surface px-1.5 py-0.5 rounded border border-terminal-border break-all;
   }
 
   .prose-terminal pre {
-    @apply bg-terminal-surface border border-terminal-border rounded-lg p-4 overflow-x-auto mb-4;
+    @apply bg-terminal-surface border border-terminal-border rounded-lg p-3 sm:p-4 overflow-x-auto mb-4 text-xs sm:text-sm;
   }
 
   .prose-terminal pre code {
@@ -80,7 +80,7 @@
   }
 
   .prose-terminal ul, .prose-terminal ol {
-    @apply mb-4 pl-6;
+    @apply mb-4 pl-5 sm:pl-6;
   }
 
   .prose-terminal li {
@@ -96,7 +96,7 @@
   }
 
   .prose-terminal img {
-    @apply rounded-lg border border-terminal-border my-6;
+    @apply rounded-lg border border-terminal-border my-4 sm:my-6 max-w-full h-auto;
   }
 
   .prose-terminal hr {

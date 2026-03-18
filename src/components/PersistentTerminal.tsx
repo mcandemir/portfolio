@@ -94,7 +94,7 @@ export default function PersistentTerminal() {
     return (
       <div className="fixed bottom-0 right-0 left-0 md:left-auto md:w-[min(36rem,100%)] md:bottom-4 md:right-4 z-50 p-2 md:p-0">
         <div
-          className="border border-terminal-border rounded-lg bg-terminal-surface shadow-2xl overflow-hidden font-mono text-sm flex flex-col"
+          className="border border-terminal-border rounded-lg bg-terminal-surface shadow-2xl overflow-hidden font-mono text-sm flex flex-col max-h-[50vh] md:max-h-none"
           style={{ height: `${height}px` }}
         >
           {/* Resize handle */}
@@ -145,7 +145,7 @@ export default function PersistentTerminal() {
     <button
       type="button"
       onClick={() => setExpanded(true)}
-      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-3 py-2 font-mono text-xs bg-terminal-surface border border-terminal-border rounded-lg text-terminal-muted hover:text-terminal-green hover:border-terminal-green/50 transition-colors shadow-lg"
+      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-3 py-2.5 font-mono text-xs bg-terminal-surface border border-terminal-border rounded-lg text-terminal-muted hover:text-terminal-green hover:border-terminal-green/50 transition-colors shadow-lg"
       aria-label="Open terminal"
     >
       <span className="text-terminal-green">~</span>
