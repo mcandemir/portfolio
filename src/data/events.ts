@@ -40,4 +40,10 @@ export const events: Event[] = [
     image: "/events/smart-city-adana-hackathon-2021.webp",
     text: "Participated in the Smart City Adana Hackathon.",
   },
+  {
+    title: "TÜBİTAK Efficiency Challenge",
+    date: "2020",
+    image: "/events/tubitak-efficiency-challenge-2020.png",
+    text: "Participated in the TÜBİTAK Efficiency Challenge.",
+  },
 ];
