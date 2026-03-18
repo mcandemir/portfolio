@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import { getCollection } from "astro:content";
 import { labProjects } from "@/data/lab-projects";
 import { events as eventsData } from "@/data/events";
@@ -28,9 +29,12 @@ const recentEvents = [...eventsData]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 ---
-<BaseLayout title="Home">
-  <!-- Experience -->
-  {latestExperience && (
+<BaseLayout title="Home" wide>
+  <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,280px)_1fr] gap-8 lg:gap-12">
+    <Sidebar />
+    <div class="min-w-0">
+    <!-- Experience -->
+    {latestExperience && (
     <section class="pb-8 sm:pb-12 pt-2 animate-fade-in">
       <h2 class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest">
         Experience
@@ -75,13 +79,13 @@ const recentEvents = [...eventsData]
         view all {experiences.length} roles →
       </a>
     </section>
-  )}
+    )}
 
-  <!-- Featured Projects -->
-  <section class="py-8 sm:py-12">
-    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      Featured Projects
-    </h2>
+    <!-- Featured Projects -->
+    <section class="py-8 sm:py-12">
+      <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+        Featured Projects
+      </h2>
     <div class="grid gap-4">
       {featuredProjects.map((project) => (
         <a
@@ -116,14 +120,14 @@ const recentEvents = [...eventsData]
       class="font-mono text-xs text-terminal-green hover:underline mt-4 inline-block"
     >
       view all {allProjects.length} projects →
-    </a>
-  </section>
+      </a>
+    </section>
 
-  <!-- The Lab (preview) -->
-  <section class="py-8 sm:py-12">
-    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      The Lab
-    </h2>
+    <!-- The Lab (preview) -->
+    <section class="py-8 sm:py-12">
+      <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+        The Lab
+      </h2>
     <p class="text-sm text-terminal-muted mb-4">
       Early experiments, CLI tools, and projects that shaped the path.
     </p>
@@ -144,14 +148,14 @@ const recentEvents = [...eventsData]
       class="font-mono text-xs text-terminal-green hover:underline"
     >
       view all {labProjects.length} lab projects →
-    </a>
-  </section>
+      </a>
+    </section>
 
-  <!-- Achievements -->
-  <section class="py-8 sm:py-12">
-    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      Achievements
-    </h2>
+    <!-- Achievements -->
+    <section class="py-8 sm:py-12">
+      <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+        Achievements
+      </h2>
     <div class="space-y-3">
       {recentAchievements.map((post) => (
         <a
@@ -166,14 +170,14 @@ const recentEvents = [...eventsData]
           </span>
         </a>
       ))}
-    </div>
-  </section>
+      </div>
+    </section>
 
-  <!-- Events -->
-  <section class="py-8 sm:py-12">
-    <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
-      Events
-    </h2>
+    <!-- Events -->
+    <section class="py-8 sm:py-12">
+      <h2 class="font-mono text-xs text-terminal-muted mb-6 uppercase tracking-widest">
+        Events
+      </h2>
     <p class="text-sm text-terminal-muted mb-4">
       Talks, meetups, and conferences I've attended.
     </p>
@@ -201,5 +205,7 @@ const recentEvents = [...eventsData]
         view events →
       </a>
     )}
-  </section>
+    </section>
+    </div>
+  </div>
 </BaseLayout>

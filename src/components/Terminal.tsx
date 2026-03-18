@@ -19,13 +19,15 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { command: "experience", description: "Work history" },
     { command: "volunteer", description: "Voluntary work & community" },
     { command: "projects", description: "Featured projects" },
+    { command: "blog", description: "Blog posts & thoughts" },
     { command: "lab", description: "The Lab (early experiments)" },
     { command: "contact", description: "How to reach me" },
     { command: "achievements", description: "Talks, articles, milestones" },
     { command: "events", description: "Talks, meetups, conferences" },
     "",
-    { command: "cd", description: "Navigate: cd projects, cd experience, cd volunteer, cd lab, ..." },
+    { command: "cd", description: "Navigate: cd blog, cd projects, cd experience, cd volunteer, cd lab, ..." },
     { command: "clear", description: "Clear terminal" },
+    { command: "exit", description: "Minimize and clear history" },
     { command: "help", description: "Show this message" },
     "",
     "  Click a command or type and press Enter.",
@@ -74,6 +76,11 @@ const COMMANDS: Record<string, OutputLine[]> = {
     { text: "LinkedIn  → linkedin.com/in/mcandemir9", href: "https://linkedin.com/in/mcandemir9" },
     { text: "Website   → mehmetcandemir.com", href: "https://mehmetcandemir.com" },
   ],
+  blog: [
+    { text: "→ /blog for all posts", href: "/blog" },
+    "",
+    "  Thoughts on software, systems, and more.",
+  ],
   lab: [
     { text: "→ /lab for The Lab", href: "/lab" },
     "",
@@ -114,6 +121,7 @@ const COMMANDS: Record<string, OutputLine[]> = {
 const CD_PATHS: Record<string, string> = {
   home: "/",
   "~": "/",
+  blog: "/blog",
   projects: "/projects",
   experience: "/experience",
   volunteer: "/volunteer",
@@ -127,7 +135,7 @@ const WELCOME = [
   "Hello, I'm Can — software engineer.",
   "I build distributed systems, backend infrastructure, and AI-powered solutions.",
   "",
-  'Type "help" to explore. Use "cd projects" to navigate.',
+  'Type "help" to explore. Use "cd blog" or "cd projects" to navigate.',
   "",
 ];
 
@@ -160,12 +168,23 @@ function saveTerminalState(history: CommandResult[], commandHistory: string[]) {
   }
 }
 
+function clearTerminalState() {
+  if (!storage) return;
+  try {
+    storage.removeItem(STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+}
+
 interface TerminalProps {
   /** When true, omit the title bar (used inside PersistentTerminal) */
   embedded?: boolean;
+  /** Called when user types "exit" — minimize and clear history */
+  onExit?: () => void;
 }
 
-export default function Terminal({ embedded = false }: TerminalProps) {
+export default function Terminal({ embedded = false, onExit }: TerminalProps) {
   const [history, setHistory] = useState<CommandResult[]>(() => {
     const saved = loadTerminalState();
     return saved?.history ?? [];
@@ -217,6 +236,14 @@ export default function Terminal({ embedded = false }: TerminalProps) {
         return;
       }
 
+      if (command === "exit") {
+        setHistory([]);
+        setCommandHistory([]);
+        clearTerminalState();
+        onExit?.();
+        return;
+      }
+
       // cd / open — navigate to path (cd alone = home)
       if (command === "cd" || command === "open") {
         const path = arg ? CD_PATHS[arg] : CD_PATHS["home"];
@@ -238,8 +265,8 @@ export default function Terminal({ embedded = false }: TerminalProps) {
           return;
         }
         const output: OutputLine[] = path === undefined && arg
-          ? [`cd: no such path "${arg}"`, "Try: home, projects, experience, lab, achievements, events"]
-          : ["Usage: cd <path>", "Paths: home, projects, experience, lab, achievements, events"];
+          ? [`cd: no such path "${arg}"`, "Try: home, blog, projects, experience, lab, achievements, events"]
+          : ["Usage: cd <path>", "Paths: home, blog, projects, experience, lab, achievements, events"];
         setHistory((prev) => [...prev, { command: cmd.trim(), output }]);
         setCommandHistory((prev) => [...prev, cmd.trim()]);
         setHistoryIndex(-1);
@@ -257,7 +284,7 @@ export default function Terminal({ embedded = false }: TerminalProps) {
       setCommandHistory((prev) => [...prev, cmd.trim()]);
       setHistoryIndex(-1);
     },
-    [],
+    [onExit],
   );
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -301,7 +328,7 @@ export default function Terminal({ embedded = false }: TerminalProps) {
       }
 
       // Command completion
-      const allCommands = [...Object.keys(COMMANDS), "cd", "open", "ll", "ls"];
+      const allCommands = [...Object.keys(COMMANDS), "cd", "open", "exit", "ll", "ls"];
       const match = allCommands.find((c) => c.startsWith(trimmed));
       if (match) setInput(match);
     }

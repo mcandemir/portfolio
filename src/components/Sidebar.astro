@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+
+const blogPosts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 10); // limit for sidebar
+---
+
+<aside class="space-y-8 shrink-0">
+  <!-- Name -->
+  <div>
+    <h2 class="text-xl font-semibold text-terminal-text">Can</h2>
+    <p class="font-mono text-xs text-terminal-muted mt-0.5">Software Engineer</p>
+  </div>
+
+  <!-- Links -->
+  <div class="flex flex-wrap gap-3">
+    <a
+      href="https://github.com/mcandemir"
+      target="_blank"
+      rel="noopener"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      aria-label="GitHub"
+    >
+      github
+    </a>
+    <a
+      href="https://www.linkedin.com/in/mcandemir9/"
+      target="_blank"
+      rel="noopener"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      aria-label="LinkedIn"
+    >
+      linkedin
+    </a>
+    <a
+      href="/rss.xml"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      aria-label="RSS Feed"
+    >
+      rss
+    </a>
+  </div>
+
+  <!-- Brief summary -->
+  <p class="text-sm text-terminal-muted leading-relaxed">
+    Backend systems, cloud, and infrastructure. Building things that scale.
+  </p>
+
+  <!-- Blog section -->
+  <div>
+    <a
+      href="/blog"
+      class="font-mono text-xs text-terminal-muted mb-4 uppercase tracking-widest hover:text-terminal-green transition-colors inline-block"
+    >
+      Blog
+    </a>
+    <div class="space-y-3 mt-3">
+      {blogPosts.map((post) => (
+        <a
+          href={`/blog/${post.id}`}
+          class="group block p-3 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+        >
+          <h3 class="text-sm font-medium text-terminal-text group-hover:text-terminal-green transition-colors line-clamp-2">
+            {post.data.title}
+          </h3>
+          <span class="font-mono text-xs text-terminal-muted mt-1 block">
+            {post.data.date.toISOString().slice(0, 10)}
+          </span>
+        </a>
+      ))}
+    </div>
+    <a
+      href="/blog"
+      class="font-mono text-xs text-terminal-green hover:underline mt-3 inline-block"
+    >
+      view all →
+    </a>
+  </div>
+</aside>

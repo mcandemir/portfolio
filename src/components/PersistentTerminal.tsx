@@ -7,6 +7,7 @@ const HEIGHT_KEY = "portfolio-terminal-height";
 const MIN_HEIGHT = 120;
 const MAX_HEIGHT = 560;
 const DEFAULT_HEIGHT = 448; // 28rem
+const TERMINAL_MIN_WIDTH = 768; // md breakpoint — start minimized on smaller screens
 
 function loadExpanded(): boolean {
   if (typeof window === "undefined") return true;
@@ -49,7 +50,22 @@ function saveHeight(height: number) {
 }
 
 export default function PersistentTerminal() {
-  const [expanded, setExpanded] = useState(loadExpanded);
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [expanded, setExpanded] = useState(false); // start minimized; desktop restores from localStorage
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${TERMINAL_MIN_WIDTH}px)`);
+    const large = mq.matches;
+    setIsLargeScreen(large);
+    if (large) setExpanded(loadExpanded());
+    const handler = (e: MediaQueryListEvent) => {
+      setIsLargeScreen(e.matches);
+      if (e.matches) setExpanded(loadExpanded());
+      else setExpanded(false); // minimize when going to small screen
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
   const [height, setHeight] = useState(loadHeight);
   const [isResizing, setIsResizing] = useState(false);
   const resizeStartRef = useRef({ y: 0, height: 0 });
@@ -134,7 +150,7 @@ export default function PersistentTerminal() {
             </button>
           </div>
           <div className="flex-1 min-h-0 overflow-hidden">
-            <Terminal embedded />
+            <Terminal embedded onExit={() => setExpanded(false)} />
           </div>
         </div>
       </div>
