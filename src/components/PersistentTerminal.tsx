@@ -136,7 +136,7 @@ export default function PersistentTerminal() {
                 <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <span className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <span className="text-terminal-muted text-xs">can@portfolio ~ %</span>
+              <span className="text-terminal-muted text-xs">mcandemir@portfolio ~ %</span>
             </div>
             <button
               type="button"

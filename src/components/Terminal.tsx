@@ -479,7 +479,7 @@ export default function Terminal({ embedded = false, onExit }: TerminalProps) {
           <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <span className="w-3 h-3 rounded-full bg-green-500/80" />
         </div>
-        <span className="text-terminal-muted text-xs ml-2">can@portfolio ~ %</span>
+        <span className="text-terminal-muted text-xs ml-2">mcandemir@portfolio ~ %</span>
       </div>
       {body}
     </div>

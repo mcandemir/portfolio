@@ -8,10 +8,19 @@ const blogPosts = (await getCollection("blog"))
 ---
 
 <aside class="space-y-8 shrink-0">
-  <!-- Name -->
+  <!-- Intro -->
   <div>
-    <h2 class="text-xl font-semibold text-terminal-text">Can</h2>
-    <p class="font-mono text-xs text-terminal-muted mt-0.5">Software Engineer</p>
+    <h2 class="text-xl font-semibold text-terminal-text">M. Can Demir</h2>
+    <p class="font-mono text-xs text-terminal-green mt-1">Software Engineer @ Yolda.com</p>
+    <p class="font-mono text-xs text-terminal-muted mt-0.5">Turkey</p>
+    <p class="text-sm text-terminal-muted leading-relaxed mt-3">
+      Backend systems, cloud, and infrastructure. Building things that scale.
+    </p>
+    <div class="flex flex-wrap gap-2 mt-3">
+      <span class="font-mono text-[10px] px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">Go</span>
+      <span class="font-mono text-[10px] px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">Python</span>
+      <span class="font-mono text-[10px] px-2 py-0.5 bg-terminal-surface border border-terminal-border rounded text-terminal-muted">TypeScript</span>
+    </div>
   </div>
 
   <!-- Links -->
@@ -42,11 +51,6 @@ const blogPosts = (await getCollection("blog"))
       rss
     </a>
   </div>
-
-  <!-- Brief summary -->
-  <p class="text-sm text-terminal-muted leading-relaxed">
-    Backend systems, cloud, and infrastructure. Building things that scale.
-  </p>
 
   <!-- Blog section -->
   <div>
