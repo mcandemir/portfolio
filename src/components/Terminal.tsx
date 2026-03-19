@@ -265,8 +265,8 @@ export default function Terminal({ embedded = false, onExit }: TerminalProps) {
           return;
         }
         const output: OutputLine[] = path === undefined && arg
-          ? [`cd: no such path "${arg}"`, "Try: home, blog, projects, experience, lab, achievements, events"]
-          : ["Usage: cd <path>", "Paths: home, blog, projects, experience, lab, achievements, events"];
+          ? [`cd: no such path "${arg}"`, "Paths: home, blog, projects, experience, lab, achievements, events", 'Tip: type "exit" to minimize and clear.']
+          : ["Usage: cd <path>", "Paths: home, blog, projects, experience, lab, achievements, events", 'Tip: type "exit" to minimize and clear.'];
         setHistory((prev) => [...prev, { command: cmd.trim(), output }]);
         setCommandHistory((prev) => [...prev, cmd.trim()]);
         setHistoryIndex(-1);
@@ -277,7 +277,7 @@ export default function Terminal({ embedded = false, onExit }: TerminalProps) {
       const output = COMMANDS[resolvedCommand];
       const result: CommandResult = {
         command: cmd.trim(),
-        output: output ?? [`command not found: ${command}`, 'Type "help" for available commands.'],
+        output: output ?? [`command not found: ${command}`, 'Try "help" for commands or "exit" to minimize.'],
       };
 
       setHistory((prev) => [...prev, result]);

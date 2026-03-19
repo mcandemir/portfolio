@@ -13,7 +13,12 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
-<BaseLayout title={post.data.title} description={post.data.description ?? post.data.title}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description ?? post.data.title}
+  article
+  publishedTime={post.data.date.toISOString()}
+>
   <article class="space-y-8">
     <!-- Breadcrumb -->
     <nav class="font-mono text-xs text-terminal-muted">

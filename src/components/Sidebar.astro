@@ -20,7 +20,7 @@ const blogPosts = (await getCollection("blog"))
       href="https://github.com/mcandemir"
       target="_blank"
       rel="noopener"
-      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-bg rounded"
       aria-label="GitHub"
     >
       github
@@ -29,14 +29,14 @@ const blogPosts = (await getCollection("blog"))
       href="https://www.linkedin.com/in/mcandemir9/"
       target="_blank"
       rel="noopener"
-      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-bg rounded"
       aria-label="LinkedIn"
     >
       linkedin
     </a>
     <a
       href="/rss.xml"
-      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors"
+      class="font-mono text-xs text-terminal-muted hover:text-terminal-green transition-colors focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-bg rounded"
       aria-label="RSS Feed"
     >
       rss
@@ -60,7 +60,7 @@ const blogPosts = (await getCollection("blog"))
       {blogPosts.map((post) => (
         <a
           href={`/blog/${post.id}`}
-          class="group block p-3 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
+          class="group block p-3 border border-terminal-border rounded-lg hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-bg"
         >
           <h3 class="text-sm font-medium text-terminal-text group-hover:text-terminal-green transition-colors line-clamp-2">
             {post.data.title}

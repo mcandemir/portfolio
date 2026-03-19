@@ -108,9 +108,9 @@ export default function PersistentTerminal() {
 
   if (expanded) {
     return (
-      <div className="fixed bottom-0 right-0 left-0 md:left-auto md:w-[min(36rem,100%)] md:bottom-4 md:right-4 z-50 p-2 md:p-0">
+      <div className="fixed bottom-0 right-0 left-0 md:left-auto md:w-[min(36rem,100%)] md:bottom-4 md:right-4 z-50 p-2 md:p-0 animate-slide-up">
         <div
-          className="border border-terminal-border rounded-lg bg-terminal-surface shadow-2xl overflow-hidden font-mono text-sm flex flex-col max-h-[50vh] md:max-h-none"
+          className="border border-terminal-border rounded-lg bg-terminal-surface shadow-2xl overflow-hidden font-mono text-sm flex flex-col max-h-[50vh] md:max-h-none transition-shadow duration-200"
           style={{ height: `${height}px` }}
         >
           {/* Resize handle */}
@@ -141,7 +141,7 @@ export default function PersistentTerminal() {
             <button
               type="button"
               onClick={() => setExpanded(false)}
-              className="text-terminal-muted hover:text-terminal-text p-2 -m-1 rounded transition-colors min-w-[2.75rem] min-h-[2.75rem] flex items-center justify-center"
+              className="text-terminal-muted hover:text-terminal-text p-2 -m-1 rounded transition-colors min-w-[2.75rem] min-h-[2.75rem] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-surface"
               aria-label="Minimize terminal"
             >
               <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -161,7 +161,7 @@ export default function PersistentTerminal() {
     <button
       type="button"
       onClick={() => setExpanded(true)}
-      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-3 py-2.5 font-mono text-xs bg-terminal-surface border border-terminal-border rounded-lg text-terminal-muted hover:text-terminal-green hover:border-terminal-green/50 transition-colors shadow-lg"
+      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-4 py-3 font-mono text-xs bg-terminal-surface border border-terminal-border rounded-lg text-terminal-muted hover:text-terminal-green hover:border-terminal-green/50 transition-colors shadow-lg min-w-[44px] min-h-[44px] focus:outline-none focus:ring-2 focus:ring-terminal-green/50 focus:ring-offset-2 focus:ring-offset-terminal-bg"
       aria-label="Open terminal"
     >
       <span className="text-terminal-green">~</span>
