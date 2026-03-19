@@ -6,7 +6,7 @@ const posts = (await getCollection("achievements"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<BaseLayout title="Achievements" description="Talks, articles, and milestones.">
+<BaseLayout title="Achievements" description="Talks, articles, and milestones." sidebar>
   <section class="space-y-8">
     <div>
       <h1 class="text-2xl sm:text-3xl font-bold text-terminal-text">Achievements</h1>

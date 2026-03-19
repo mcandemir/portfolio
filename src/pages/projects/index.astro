@@ -6,7 +6,7 @@ const projects = (await getCollection("projects")).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
-<BaseLayout title="Projects" description="Things I've built.">
+<BaseLayout title="Projects" description="Things I've built." sidebar>
   <section class="space-y-8">
     <div>
       <h1 class="text-2xl sm:text-3xl font-bold text-terminal-text">Projects</h1>

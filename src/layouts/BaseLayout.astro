@@ -2,6 +2,7 @@
 import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
 import CircuitBackground from "@/components/CircuitBackground.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import PersistentTerminal from "@/components/PersistentTerminal";
 import { ViewTransitions } from "astro:transitions";
 import "@/styles/global.css";
@@ -11,6 +12,10 @@ interface Props {
   description?: string;
   ogImage?: string;
   wide?: boolean;
+  /** Show left sidebar (name, links, blog). When false, sidebar hidden on mobile. */
+  sidebar?: boolean;
+  /** When true, sidebar stays visible on mobile. Only home uses this. */
+  sidebarOnMobile?: boolean;
 }
 
 const {
@@ -18,9 +23,13 @@ const {
   description = "Software Engineer — Backend Systems, Cloud, and Infrastructure.",
   ogImage = "/og-default.png",
   wide = false,
+  sidebar = false,
+  sidebarOnMobile = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const showSidebar = sidebar;
+const mainWide = wide || showSidebar;
 ---
 <!doctype html>
 <html lang="en">
@@ -61,8 +70,19 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
   <body class="min-h-screen flex flex-col">
     <CircuitBackground />
     <Nav />
-    <main class:list={["flex-1 mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full animate-fade-in", wide ? "max-w-6xl" : "max-w-4xl"]}>
-      <slot />
+    <main class:list={["flex-1 mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full animate-fade-in", mainWide ? "max-w-6xl" : "max-w-4xl"]}>
+      {showSidebar ? (
+        <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,280px)_1fr] gap-8 lg:gap-12">
+          <aside class:list={[!sidebarOnMobile && "hidden lg:block"]}>
+            <Sidebar />
+          </aside>
+          <div class="min-w-0">
+            <slot />
+          </div>
+        </div>
+      ) : (
+        <slot />
+      )}
     </main>
     <Footer />
     <PersistentTerminal client:idle transition:persist="terminal" />

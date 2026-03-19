@@ -6,7 +6,7 @@ const posts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
-<BaseLayout title="Blog" description="Thoughts on software, systems, and more.">
+<BaseLayout title="Blog" description="Thoughts on software, systems, and more." sidebar>
   <section class="space-y-8">
     <div>
       <h1 class="text-2xl sm:text-3xl font-bold text-terminal-text">Blog</h1>
