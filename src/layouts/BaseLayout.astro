@@ -73,6 +73,12 @@ const mainWide = wide || showSidebar;
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="M. Can Demir | Blog"
+      href={new URL("rss.xml", Astro.site)}
+    />
     <ViewTransitions />
   </head>
   <body class="min-h-screen flex flex-col">
