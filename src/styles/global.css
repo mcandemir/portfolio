@@ -80,7 +80,15 @@
   }
 
   .prose-terminal ul, .prose-terminal ol {
-    @apply mb-4 pl-5 sm:pl-6;
+    @apply mb-4 pl-5 sm:pl-6 list-outside;
+  }
+
+  .prose-terminal ul {
+    list-style-type: disc;
+  }
+
+  .prose-terminal ol {
+    list-style-type: decimal;
   }
 
   .prose-terminal li {

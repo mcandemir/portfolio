@@ -27,6 +27,15 @@ const { Content } = await render(post);
       <span class="text-terminal-text">{post.id}</span>
     </nav>
 
+    <!-- Cover image -->
+    {post.data.coverImage && (
+      <img
+        src={post.data.coverImage}
+        alt=""
+        class="rounded-lg border border-terminal-border w-full max-h-64 object-cover mb-6"
+      />
+    )}
+
     <!-- Header -->
     <header class="space-y-4 pb-6 border-b border-terminal-border">
       <h1 class="text-2xl sm:text-3xl font-bold text-terminal-text leading-tight">
