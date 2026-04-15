@@ -14,7 +14,7 @@ const projects = (await getCollection("projects")).sort(
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {projects.map((project, i) => (
+      {projects.map((project) => (
         <a
           href={`/projects/${project.id}`}
           class="group block border border-terminal-border rounded-lg overflow-hidden hover:border-terminal-green/30 hover:bg-terminal-surface/50 transition-all"
@@ -28,11 +28,8 @@ const projects = (await getCollection("projects")).sort(
               />
             ) : (
               <div class="w-full h-full flex items-center justify-center bg-terminal-bg border-b border-terminal-border">
-                <div class="flex flex-col items-center gap-2 text-terminal-muted/50">
-                  <div class="w-12 h-12 rounded border-2 border-dashed border-terminal-border flex items-center justify-center">
-                    <span class="font-mono text-lg text-terminal-green/40">{project.data.title.charAt(0)}</span>
-                  </div>
-                  <span class="font-mono text-[10px] uppercase tracking-wider">placeholder</span>
+                <div class="w-12 h-12 rounded border-2 border-dashed border-terminal-border flex items-center justify-center text-terminal-muted/50">
+                  <span class="font-mono text-lg text-terminal-green/40">{project.data.title.charAt(0)}</span>
                 </div>
               </div>
             )}

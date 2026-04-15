@@ -46,7 +46,11 @@ export async function getStaticPaths() {
 const { project, readmeHtml } = Astro.props;
 const { Content } = await render(project);
 ---
-<BaseLayout title={project.data.title} description={project.data.description}>
+<BaseLayout
+  title={project.data.title}
+  description={project.data.description}
+  ogImage={project.data.coverImage}
+>
   <article class="space-y-8">
     <!-- Breadcrumb -->
     <nav class="font-mono text-xs text-terminal-muted">

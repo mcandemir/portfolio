@@ -75,4 +75,4 @@ Push to `master` triggers GitHub Actions → SSH to server → `git pull` + `doc
 
 ## License
 
-Personal -dream- portfolio.
+Personal portfolio.

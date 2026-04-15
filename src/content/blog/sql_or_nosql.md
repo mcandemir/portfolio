@@ -5,21 +5,21 @@ date: 2026-02-28
 tags: ["SQL", "NoSQL", "Databases"]
 ---
 
-The answer this frequent question is actually pretty boring: *it depends*. Depends on; What are you building? What does the data actually look like? What are the relationships?
+The answer to this question is actually pretty boring: *it depends*. What are you building? What does the data actually look like? What are the relationships?
 
 **Where SQL usually wins:**
 
-- You've got clear relationships: users, orders, line items, that kind of thing. Normalized tables and JOINs exist for a reason.
-- Your team already knows it. Onboarding is cheaper when half the squad has written SQL before.
-- You care about consistency. ACID isn't just jargon — it's peace of mind when money or important state is involved.
-- You're not sure yet. Schemas can evolve. PostgreSQL's JSONB gives you an escape hatch without going full document store.
+- Relationships are obvious — users, orders, that stuff. JOINs exist for a reason.
+- Half the team already writes SQL. Why make everyone learn something new?
+- Money or state you can't screw up. ACID isn't just for textbooks.
+- You're still figuring it out. Postgres has JSONB when you want to defer schema decisions a bit.
 
 **Where NoSQL makes sense:**
 
-- You're writing a firehose of events (logs, metrics, user actions). Append-heavy, rarely queried — document or time-series stores handle this without sweating.
-- You need to scale out horizontally from the start. Not "maybe someday" — you know the load is coming.
-- The data is naturally nested and you're mostly keying by ID. Product catalogs with deep variants, config blobs, that sort of thing.
-- You're prototyping fast and schema changes would slow you down. Just watch out — that flexibility can bite you when the prototype becomes the product.
+- You're mostly appending — logs, metrics, whatever. Heavy relational reads would be overkill.
+- You already know you'll need to scale out. Not "someday" — it's coming.
+- Nested blobs you fetch by ID. Weird product catalogs, big configs, etc.
+- Prototype mode and migrations every week would hurt. Fine — just remember that gets old once the prototype sticks around.
 
 If you're starting something new and you're unsure, default to PostgreSQL. It's versatile, well-understood, and you can always shard or add read replicas later. Don't choose based on hype or what Twitter said.
 
